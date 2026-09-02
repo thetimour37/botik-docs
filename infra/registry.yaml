@@ -19,13 +19,16 @@ units:
     name: "botik-docs (документация)"
     purpose: "Бэклог, методология, спецификация поведения бота, продуктовые материалы"
     projects: [botik]
-    access: [Тимур]
+    connects_to: [jarvis]
+    access: [Тимур, "Jarvis (deploy key, запись)"]
     description: >
       GitHub thetimour37/botik-docs (private), ветка main. Локально — внутри
       Obsidian-хранилища: C:\Users\user\Documents\Obsidian Vault\Obsidian
       Vault\Ботик\botik-docs. Синхронизация с GitHub проверяется ежедневно в
       9:00 (Windows Task Scheduler, scripts/check-sync.ps1). spec/ содержит
-      актуальную (август 2026) концепцию продукта.
+      актуальную (август 2026) концепцию продукта. У Jarvis есть deploy key
+      с правом записи (настроен в GitHub → Settings → Deploy keys) — приватный
+      ключ хранится на стороне Jarvis, вне этого проекта.
     status: active
     owner: Тимур
     updated: 2026-09-02
@@ -82,6 +85,35 @@ units:
     projects: [botik]
     access: [Тимур]
     description: "Ключ ANTHROPIC_API_KEY в Railway env."
+    status: active
+    owner: Тимур
+    updated: 2026-09-02
+
+  - id: jarvis
+    type: service
+    name: "Jarvis (AI-ассистент)"
+    purpose: "AI-ассистент для команды (Тимур, Настя) — работа с документацией и планированием проекта"
+    projects: [botik]
+    connects_to: [repo-botik-docs]
+    access: [Тимур, Настя]
+    description: >
+      Серверное приложение. Интерфейс — Telegram-бот bot-jarvis. Имеет
+      deploy key с правом записи в repo-botik-docs (см. описание объекта).
+      Хостинг и детали инфраструктуры самого Jarvis — вне области этого
+      проекта (owner неизвестен / не проектный ресурс).
+    status: active
+    owner: Тимур
+    updated: 2026-09-02
+
+  - id: bot-jarvis
+    type: telegram_bot
+    name: "@ameripresso_jarvis_bot"
+    hosted_on: jarvis
+    purpose: "Telegram-интерфейс к Jarvis для Тимура и Насти"
+    projects: [botik]
+    connects_to: [jarvis]
+    access: [Тимур, Настя]
+    description: "Основной канал общения команды с Jarvis."
     status: active
     owner: Тимур
     updated: 2026-09-02
