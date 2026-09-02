@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Ботик — схема общения с пользователем v1.0</title>
+<style>
+  :root {
+    --bg: #f7f4ef;
+    --card: #ffffff;
+    --ink: #2b2b2b;
+    --muted: #6b6b6b;
+    --accent: #d97757;
+    --accent-soft: #f9e6dd;
+    --line: #e7e2d9;
+    --green: #6ba368;
+    --amber: #d4a13a;
+    --red: #c04a3e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    padding: 40px 20px 80px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  header h1 {
+    font-size: 32px;
+    margin: 0 0 8px;
+    letter-spacing: -0.5px;
+  }
+  header .sub {
+    color: var(--muted);
+    font-size: 15px;
+  }
+  header .badge {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 12px;
+    letter-spacing: 0.3px;
+  }
+
+  .block {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 26px 28px;
+    margin-bottom: 22px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+  .block h2 {
+    margin: 0 0 6px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .block .num {
+    background: var(--accent);
+    color: white;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .block .caption {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 18px;
+  }
+
+  .step {
+    padding: 14px 16px;
+    border-left: 3px solid var(--accent);
+    background: #fbf8f3;
+    border-radius: 0 8px 8px 0;
+    margin: 10px 0;
+  }
+  .step .label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .quote {
+    font-style: italic;
+    color: #4a4a4a;
+    background: #fdfaf5;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 10px 0;
+    border: 1px dashed var(--line);
+  }
+  .btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0 4px;
+  }
+  .btn {
+    background: white;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 14px 0 6px;
+  }
+  .card {
+    background: #fbf8f3;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .card .k { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.3px; }
+  .card .v { font-weight: 600; margin-top: 2px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 4px;
+    font-size: 14px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  th {
+    background: #fbf8f3;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .tag.open { background: #fdecea; color: var(--red); }
+  .tag.ok { background: #e8f2e6; color: var(--green); }
+
+  .note {
+    background: #fef7e6;
+    border: 1px solid #f0dfa8;
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: #6b5a1e;
+    font-size: 14px;
+    margin: 12px 0;
+  }
+  .note b { color: var(--amber); }
+
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 12px 0;
+  }
+  .flow .row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .flow .arrow {
+    color: var(--accent);
+    font-size: 18px;
+    text-align: center;
+    padding: 4px 0;
+  }
+  .flow .box {
+    background: #fbf8f3;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    flex: 1;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 40px;
+  }
+
+  h3 {
+    font-size: 15px;
+    margin: 18px 0 6px;
+    color: var(--accent);
+  }
+  ul { padding-left: 20px; }
+  li { margin: 4px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Ботик — схема общения с пользователем</h1>
+  <div class="sub">Полный путь: от первого «Привет» до конца недельного цикла</div>
+  <div class="badge">версия 1.0 · для проверки</div>
+</header>
+
+<!-- БЛОК 1 -->
+<div class="block">
+  <h2><span class="num">1</span> Контракт — один раз на старте</h2>
+  <div class="caption">Три вопроса с кнопками. Настраиваем, как бот будет вести себя дальше.</div>
+
+  <div class="step">
+    <div class="label">Вопрос 1 — время вечернего резюме</div>
+    <div class="quote">«В какое время тебе удобно получать вечернее резюме?»</div>
+    <div class="btns">
+      <span class="btn">19:00</span>
+      <span class="btn">20:00</span>
+      <span class="btn">21:00</span>
+      <span class="btn">22:00</span>
+      <span class="btn">Другое</span>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="label">Вопрос 2 — напоминания днём</div>
+    <div class="quote">«Хочешь получать напоминания, если не писал наблюдений до вечера?»</div>
+    <div class="btns">
+      <span class="btn">Да, напоминай</span>
+      <span class="btn">Нет, сам напишу</span>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="label">Вопрос 3 — молчание 3 дня</div>
+    <div class="quote">«Если ты не пишешь 3 дня — что мне делать?»</div>
+    <div class="btns">
+      <span class="btn">Напомни мне</span>
+      <span class="btn">Поставь на паузу</span>
+      <span class="btn">Ничего не делай</span>
+    </div>
+  </div>
+
+  <h3>Дефолты (если пропустил контракт)</h3>
+  <div class="grid">
+    <div class="card"><div class="k">Время резюме</div><div class="v">20:00</div></div>
+    <div class="card"><div class="k">Напоминания</div><div class="v">Включены</div></div>
+    <div class="card"><div class="k">Молчание 3 дня</div><div class="v">Спросить «продолжаем?»</div></div>
+  </div>
+  <div class="note">Настройки можно поменять в любой момент через <b>/settings</b>.</div>
+</div>
+
+<!-- БЛОК 2 -->
+<div class="block">
+  <h2><span class="num">2</span> Выявление запроса и фокуса недели</h2>
+  <div class="caption">Договариваемся, о чём наблюдаем на этой неделе. Тема потом заблокирована до субботы.</div>
+
+  <div class="flow">
+    <div class="row"><div class="box"><b>Шаг 1.</b> Бот спрашивает: «Что сейчас важно или беспокоит — расскажи своими словами». Пользователь пишет свободно.</div></div>
+    <div class="arrow">↓</div>
+    <div class="row"><div class="box"><b>Шаг 2.</b> Максимум 2 уточняющих вопроса (про сферу и про ценность). Больше не задаём.</div></div>
+    <div class="arrow">↓</div>
+    <div class="row"><div class="box"><b>Шаг 3.</b> <b>Пользователь сам формулирует фокус.</b> Бот не предлагает свою версию, пока не попросят. Если попросили — нужно явное «Да, подходит».</div></div>
+    <div class="arrow">↓</div>
+    <div class="row"><div class="box"><b>Шаг 4.</b> Оценка 1–10 по теме. Точка отсчёта, не зачёт.</div></div>
+    <div class="arrow">↓</div>
+    <div class="row"><div class="box"><b>Шаг 5.</b> Бот подтверждает: тема + ценность + оценка. Неделя запущена.</div></div>
+  </div>
+</div>
+
+<!-- БЛОК 3 -->
+<div class="block">
+  <h2><span class="num">3</span> Ежедневный сбор наблюдений</h2>
+  <div class="caption">Пользователь пишет в моменте. Бот в режиме «только приём».</div>
+
+  <h3>Реакция бота на сообщения</h3>
+  <table>
+    <tr><th>Сообщение</th><th>Что делает бот</th></tr>
+    <tr><td>Первые 3 за всю историю</td><td>Короткое зеркальное отражение + фраза о ценности. Без анализа.</td></tr>
+    <tr><td>С 4-го и дальше</td><td>Только эмодзи-реакция: ✅ или 🤍. Без текста.</td></tr>
+  </table>
+
+  <div class="quote">Пример отражения:<br>«Ты заметил, что злишься, когда тебя перебивают — и зафиксировал это. Именно такие моменты в итоге и показывают самое важное».</div>
+
+  <h3>Особые случаи</h3>
+  <ul>
+    <li><b>Пользователь просит помощи</b> → выход из режима приёма, короткий диалог, мягкий возврат к формату.</li>
+    <li><b>Уход на другую тему</b> → бот признаёт и предлагает: «Запомнить как тему на следующую неделю?»</li>
+    <li><b>Тяжёлый сигнал</b> <span class="tag open">на согласовании с Настей</span> → выход из приёма, признание, предложение контакта Насти или кризисной службы. Тема недели ставится на паузу.</li>
+  </ul>
+</div>
+
+<!-- БЛОК 4 -->
+<div class="block">
+  <h2><span class="num">4</span> Вечернее резюме</h2>
+  <div class="caption">Приходит в согласованное время каждый день — были наблюдения или нет.</div>
+
+  <div class="flow">
+    <div class="row"><div class="box">Если за день <b>ничего не написал</b> → бот задаёт один вопрос: «Есть что-то сегодня по твоему наблюдению?»</div></div>
+    <div class="arrow">↓ ждёт 30 минут</div>
+    <div class="row">
+      <div class="box"><b>Ответил</b> → включаем в резюме</div>
+      <div class="box"><b>Молчит</b> → резюме без него</div>
+    </div>
+  </div>
+
+  <h3>Структура резюме <span class="tag open">формат согласовать с Настей</span></h3>
+  <ol>
+    <li><b>Отражение</b> — что бот услышал за день (без оценки)</li>
+    <li><b>Одно наблюдение</b> — что-то заметное в том, что пришло</li>
+    <li><b>Закрытие</b> — со временем следующего контакта</li>
+  </ol>
+
+  <div class="note"><b>После резюме диалог закрыт.</b> Бот не отвечает до следующего утра — кроме кризисных сигналов. Точная закрывающая фраза <b>на согласовании с Настей</b>.</div>
+</div>
+
+<!-- БЛОК 5 -->
+<div class="block">
+  <h2><span class="num">5</span> Что если пользователь молчит</h2>
+
+  <table>
+    <tr><th>День без сообщений</th><th>Что делает бот</th></tr>
+    <tr><td>День 1</td><td>Ничего. Вечернее резюме как обычно.</td></tr>
+    <tr><td>День 2</td><td>Резюме как обычно, с уточняющим вопросом перед ним.</td></tr>
+    <tr><td>День 3</td><td>Кнопочный вопрос: «Стоит ли продолжить ежедневный анализ?» → Да / Нет</td></tr>
+    <tr><td>Нет ответа</td><td>«До конца недели анализ на паузе. Недельное резюме пришлю в субботу».</td></tr>
+  </table>
+
+  <h3>Напоминания в течение дня</h3>
+  <ul>
+    <li>Только если включил в контракте</li>
+    <li>Не раньше 15:00 и не позже чем за 2 часа до вечернего резюме</li>
+    <li>Если уже написал что-то за день — напоминание не приходит</li>
+  </ul>
+
+  <div class="note">Бот пишет первым <b>только вечером</b>. Утренний контакт — опция, не дефолт.</div>
+</div>
+
+<!-- БЛОК 6 -->
+<div class="block">
+  <h2><span class="num">6</span> Недельный цикл</h2>
+  <div class="caption">Суббота, 9:00. Независимо от количества наблюдений.</div>
+
+  <h3>Что внутри</h3>
+  <ol>
+    <li>Сводка наблюдений за неделю</li>
+    <li>Повторная оценка 1–10 по той же теме</li>
+    <li>Разрыв: было <b>X</b> → стало <b>Y</b>. Как данные, не как зачёт.</li>
+    <li>Один вопрос: «Что, как тебе кажется, влияло на это?»</li>
+    <li>Выбор следующего шага:
+      <div class="btns" style="margin-top:8px">
+        <span class="btn">Продолжить эту тему</span>
+        <span class="btn">Взять новый запрос</span>
+      </div>
+    </li>
+  </ol>
+
+  <h3>Дашборд — каждую неделю</h3>
+  <ul>
+    <li>Данных много (2+ цикла) → динамика оценок 1–10 по теме</li>
+    <li>Данных мало → объём наблюдений по дням недели</li>
+  </ul>
+</div>
+
+<!-- БЛОК 7 -->
+<div class="block">
+  <h2><span class="num">7</span> Месячный срез</h2>
+  <div class="caption">Первая суббота нового месяца — вместо обычного недельного резюме.</div>
+  <ul>
+    <li>Оценка всех сфер жизни по колесу баланса (1–10 по каждой)</li>
+    <li>Сравнение с прошлым месяцем — если данные есть</li>
+    <li>Новая точка на дашборде</li>
+  </ul>
+</div>
+
+<!-- КОМАНДЫ -->
+<div class="block">
+  <h2><span class="num">⌘</span> Команды бота</h2>
+  <table>
+    <tr><th>Команда</th><th>Действие</th></tr>
+    <tr><td><b>/settings</b></td><td>Посмотреть и поменять контракт</td></tr>
+    <tr><td><b>/focus</b></td><td>Текущий фокус недели и оценка 1–10</td></tr>
+    <tr><td><b>/dashboard</b></td><td>Дашборд динамики</td></tr>
+    <tr><td><b>/support</b></td><td>Техническая поддержка</td></tr>
+    <tr><td><b>/pause</b></td><td>Поставить анализ на паузу вручную</td></tr>
+  </table>
+</div>
+
+<!-- ОТКРЫТЫЕ ВОПРОСЫ -->
+<div class="block" style="border-color:#f0dfa8; background:#fef7e6;">
+  <h2><span class="num" style="background:var(--amber)">?</span> Что ещё нужно согласовать с Настей</h2>
+  <table>
+    <tr><th>#</th><th>Вопрос</th></tr>
+    <tr><td>Н-1</td><td>Структура и тон вечернего резюме — как звучит отражение</td></tr>
+    <tr><td>Н-2</td><td>Закрывающая фраза дня — как именно бот завершает вечер</td></tr>
+    <tr><td>Н-3</td><td>Алгоритм при кризисном сигнале — слова, момент, кому передать</td></tr>
+  </table>
+</div>
+
+<footer>
+  Ботик v1.0 · схема взаимодействия · для проверки Тимуром и Настей
+</footer>
+
+</div>
+</body>
+</html>
