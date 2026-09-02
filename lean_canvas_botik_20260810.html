@@ -1,0 +1,227 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.canvas { padding: 1rem 0; }
+.title-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 1rem; }
+.title-row h1 { font-size: 18px; font-weight: 500; color: var(--text-primary); }
+.title-row span { font-size: 13px; color: var(--text-muted); }
+.grid { display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: auto auto auto; gap: 6px; }
+.cell {
+  background: var(--surface-2);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  min-height: 150px;
+}
+.cell.tall { min-height: 220px; }
+.cell-label {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.cell-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.cell ul { list-style: none; padding: 0; }
+.cell ul li {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  padding: 3px 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.cell ul li:last-child { border-bottom: none; }
+.cell ul li::before {
+  content: "—";
+  color: var(--text-muted);
+  margin-right: 6px;
+  font-size: 10px;
+}
+.accent-border { border-left: 2px solid var(--border-accent); }
+.success-border { border-left: 2px solid var(--border-success); }
+.warning-border { border-left: 2px solid var(--border-warning); }
+.danger-border { border-left: 2px solid var(--border-danger); }
+.pro-border { border-left: 2px solid var(--border-pro); }
+
+.bottom-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 6px; }
+.bottom-cell {
+  background: var(--surface-2);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin: 2px 2px 2px 0;
+  font-weight: 400;
+}
+.tag-accent { background: var(--bg-accent); color: var(--text-accent); }
+.tag-success { background: var(--bg-success); color: var(--text-success); }
+.tag-warning { background: var(--bg-warning); color: var(--text-warning); }
+.tag-pro { background: var(--bg-pro); color: var(--text-pro); }
+</style>
+
+<div class="canvas">
+  <div class="title-row">
+    <h1>Lean Canvas — Ботик</h1>
+    <span>v2.0 · концепт для согласования</span>
+  </div>
+
+  <div class="grid">
+
+    <div class="cell tall accent-border" style="grid-column: 1; grid-row: 1 / 3;">
+      <div class="cell-label">Проблема</div>
+      <div class="cell-title">Что не работает у аудитории</div>
+      <ul>
+        <li>Инсайты не удерживаются — каждый раз «как будто заново»</li>
+        <li>Нет ощущения роста: поговорил с ботом, и что?</li>
+        <li>Открытые ИИ-чаты не держат фокус — уходят куда угодно</li>
+        <li>Психолог дорого, редко, и «нулевой период» тратится впустую</li>
+        <li>Дневники не дают обратной связи и не показывают динамику</li>
+      </ul>
+      <div style="margin-top: 10px;">
+        <div class="cell-label" style="margin-bottom: 4px;">Существующие альтернативы</div>
+        <span class="tag tag-accent">GPT-чаты</span>
+        <span class="tag tag-accent">Дневники</span>
+        <span class="tag tag-accent">Медитация-приложения</span>
+      </div>
+    </div>
+
+    <div class="cell success-border" style="grid-column: 2; grid-row: 1;">
+      <div class="cell-label">Решение</div>
+      <div class="cell-title">Что делает продукт</div>
+      <ul>
+        <li>Один фокус на неделю — без переключений</li>
+        <li>Сбор наблюдений в моменте, не вечером по памяти</li>
+        <li>Ежедневное короткое резюме (5–10 мин)</li>
+        <li>Оценка 1–10 в начале и конце недели — видимый сдвиг</li>
+        <li>Каркас ACT + Колесо баланса как методология</li>
+      </ul>
+    </div>
+
+    <div class="cell" style="grid-column: 3; grid-row: 1 / 3; border-left: 2px solid var(--border-stronger);">
+      <div class="cell-label">Уникальная ценность</div>
+      <div class="cell-title" style="font-size: 15px; line-height: 1.45;">Первый инструмент, который не просто слушает — а показывает, что ты меняешься</div>
+      <div style="margin-top: 12px; font-size: 12px; color: var(--text-secondary); line-height: 1.6;">
+        Не «поговорить», а увидеть измеримый сдвиг по одной теме за неделю. Глубина копится не за счёт длинных бесед, а за счёт регулярного возвращения к одному и тому же.
+      </div>
+      <div style="margin-top: 16px;">
+        <div class="cell-label" style="margin-bottom: 6px;">Главная концепция</div>
+        <div style="background: var(--bg-accent); border-radius: 8px; padding: 8px 10px; font-size: 12px; color: var(--text-accent); line-height: 1.5;">
+          Один запрос → одна неделя → измеримый результат
+        </div>
+      </div>
+    </div>
+
+    <div class="cell warning-border" style="grid-column: 4; grid-row: 1;">
+      <div class="cell-label">Преимущество</div>
+      <div class="cell-title">Сложно скопировать</div>
+      <ul>
+        <li>Накопленный контекст — уйти = потерять историю наблюдений</li>
+        <li>Персона Анастасия + методология ACT в одном промпте</li>
+        <li>Связь с живым психологом как «следующий шаг»</li>
+        <li>Дашборд динамики — ценность растёт со временем</li>
+      </ul>
+    </div>
+
+    <div class="cell danger-border" style="grid-column: 5; grid-row: 1 / 3;">
+      <div class="cell-label">Сегменты</div>
+      <div class="cell-title">Кто это</div>
+      <ul>
+        <li>Хочет понимать себя, но устал от хаоса инсайтов</li>
+        <li>Был у психолога, потерял фокус между сессиями</li>
+        <li>Хочет привычку осознанности, но не может — нет структуры</li>
+        <li>Готов к регулярному формату 5–10 мин/день</li>
+      </ul>
+      <div style="margin-top: 10px;">
+        <div class="cell-label" style="margin-bottom: 4px;">Ранние последователи</div>
+        <ul>
+          <li>Фан-клуб Тимура — первые ~10 человек</li>
+          <li>Клиенты и контакты Анастасии</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cell success-border" style="grid-column: 2; grid-row: 2;">
+      <div class="cell-label">Ключевые метрики</div>
+      <div class="cell-title">Что измеряем</div>
+      <ul>
+        <li>Retention D7 / D30 (возвращается ли)</li>
+        <li>% недель с ≥3 наблюдениями за неделю</li>
+        <li>Средний сдвиг оценки 1–10 за цикл</li>
+        <li>Конверсия в запрос психолога</li>
+        <li>NPS после первого недельного цикла</li>
+      </ul>
+    </div>
+
+    <div class="cell warning-border" style="grid-column: 4; grid-row: 2;">
+      <div class="cell-label">Каналы</div>
+      <div class="cell-title">Как доберёмся</div>
+      <ul>
+        <li>Фан-клуб Тимура → первый пилот</li>
+        <li>Клиентская база Анастасии → психологический канал</li>
+        <li>Сарафан: психолог рекомендует боту → бот рекомендует психологу</li>
+        <li>Telegram-сообщества по саморазвитию</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="bottom-row">
+    <div class="bottom-cell pro-border">
+      <div class="cell-label" style="margin-bottom: 6px;">Структура затрат</div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 120px;">
+          <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">Операционные</div>
+          <ul class="cell" style="min-height: unset; border: none; padding: 0; background: none;">
+            <li style="font-size: 12px; border-bottom: 0.5px solid var(--border); padding: 3px 0; color: var(--text-secondary);">Claude API (Anthropic)</li>
+            <li style="font-size: 12px; border-bottom: 0.5px solid var(--border); padding: 3px 0; color: var(--text-secondary);">Railway (хостинг + БД)</li>
+            <li style="font-size: 12px; border-bottom: none; padding: 3px 0; color: var(--text-secondary);">Telegram Bot API (бесплатно)</li>
+          </ul>
+        </div>
+        <div style="flex: 1; min-width: 120px;">
+          <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">Основной ресурс</div>
+          <ul class="cell" style="min-height: unset; border: none; padding: 0; background: none;">
+            <li style="font-size: 12px; border-bottom: 0.5px solid var(--border); padding: 3px 0; color: var(--text-secondary);">Время Тимура (разработка)</li>
+            <li style="font-size: 12px; border-bottom: 0.5px solid var(--border); padding: 3px 0; color: var(--text-secondary);">Время Насти (методология + тест)</li>
+            <li style="font-size: 12px; border-bottom: none; padding: 3px 0; color: var(--text-secondary);">Промпт-инжиниринг</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-cell accent-border">
+      <div class="cell-label" style="margin-bottom: 6px;">Потоки выручки</div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 130px;">
+          <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">v1.0 (сейчас — бесплатно)</div>
+          <ul class="cell" style="min-height: unset; border: none; padding: 0; background: none;">
+            <li style="font-size: 12px; border-bottom: 0.5px solid var(--border); padding: 3px 0; color: var(--text-secondary);">Пилот на фан-клубе — без оплаты</li>
+            <li style="font-size: 12px; border-bottom: none; padding: 3px 0; color: var(--text-secondary);">Цель: проверить retention и петлю</li>
+          </ul>
+        </div>
+        <div style="flex: 1; min-width: 130px;">
+          <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">v2.0 (монетизация)</div>
+          <ul class="cell" style="min-height: unset; border: none; padding: 0; background: none;">
+            <li style="font-size: 12px; border-bottom: 0.5px solid var(--border); padding: 3px 0; color: var(--text-secondary);">Freemium → подписка (глубина + история)</li>
+            <li style="font-size: 12px; border-bottom: 0.5px solid var(--border); padding: 3px 0; color: var(--text-secondary);">B2B: белый лейбл для психологов</li>
+            <li style="font-size: 12px; border-bottom: none; padding: 3px 0; color: var(--text-secondary);">Реферальная модель бот ↔ психолог</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
