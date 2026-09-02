@@ -1,0 +1,87 @@
+units:
+  - id: repo-botik
+    type: repository
+    name: "botik (код)"
+    purpose: "Исходный код бота Анастасия"
+    projects: [botik]
+    connects_to: [railway-botik]
+    access: [Тимур]
+    description: >
+      GitHub thetimour37/botik, ветка master. Railway задеплоен по push в эту
+      ветку. Локально: C:\Users\user\projects\botik. Push в master — только по
+      явному решению пользователя (не автоматически).
+    status: active
+    owner: Тимур
+    updated: 2026-09-02
+
+  - id: repo-botik-docs
+    type: repository
+    name: "botik-docs (документация)"
+    purpose: "Бэклог, методология, спецификация поведения бота, продуктовые материалы"
+    projects: [botik]
+    access: [Тимур]
+    description: >
+      GitHub thetimour37/botik-docs (private), ветка main. Локально — внутри
+      Obsidian-хранилища: C:\Users\user\Documents\Obsidian Vault\Obsidian
+      Vault\Ботик\botik-docs. Синхронизация с GitHub проверяется ежедневно в
+      9:00 (Windows Task Scheduler, scripts/check-sync.ps1). spec/ содержит
+      актуальную (август 2026) концепцию продукта.
+    status: active
+    owner: Тимур
+    updated: 2026-09-02
+
+  - id: railway-botik
+    type: service
+    name: "Railway — botik"
+    purpose: "Хостинг worker-процесса бота (Procfile: worker: python main.py)"
+    projects: [botik]
+    connects_to: [db-botik-pg]
+    access: [Тимур]
+    description: >
+      PaaS-хостинг, автодеплой по push в repo-botik@master (настройка
+      автодеплоя — в панели Railway, не в коде репозитория).
+    status: active
+    owner: Тимур
+    updated: 2026-09-02
+
+  - id: db-botik-pg
+    type: service
+    name: "PostgreSQL (Railway)"
+    hosted_on: railway-botik
+    purpose: "Хранение пользователей, диалогов, профилей, итогов рефлексии (daily/weekly/monthly/yearly summaries)"
+    projects: [botik]
+    access: [Тимур]
+    description: >
+      Подключение через переменную окружения DATABASE_PUBLIC_URL, доступ из
+      кода через asyncpg-пул (database.py).
+    status: active
+    owner: Тимур
+    updated: 2026-09-02
+
+  - id: bot-anastasia
+    type: telegram_bot
+    name: "Анастасия"
+    hosted_on: railway-botik
+    purpose: "Психологический коуч-бот для осознанной рефлексии"
+    projects: [botik]
+    connects_to: [db-botik-pg, api-anthropic]
+    access: [Тимур, Анастасия]
+    description: >
+      aiogram 3, FSM-логика и обработчики в main.py, планировщик APScheduler
+      (вечерняя рефлексия 16:00 UTC, недельные/месячные/годовые итоги).
+      Токен — TELEGRAM_BOT_TOKEN (Railway env). Переименование бота
+      запланировано, но не выполнено (backlog 1.5, устаревшая концепция).
+    status: active
+    owner: Тимур
+    updated: 2026-09-02
+
+  - id: api-anthropic
+    type: service
+    name: "Anthropic Claude API"
+    purpose: "Генерация ответов бота — модель claude-opus-4-5"
+    projects: [botik]
+    access: [Тимур]
+    description: "Ключ ANTHROPIC_API_KEY в Railway env."
+    status: active
+    owner: Тимур
+    updated: 2026-09-02
