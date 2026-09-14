@@ -18,15 +18,21 @@ C:\Users\user\Documents\Obsidian Vault\Obsidian Vault\Ботик\botik-docs     
 
 ## ⚠️ Концепция пересмотрена (август 2026)
 
-`spec/` — актуальная концепция, читать в первую очередь. Корневые `how-it-works-now.md`, `how-it-should-work-backlog.md`, `roadmap.md` отражают старую (апрельскую) концепцию — актуален только блок 🔴 бэклога. Подробности — в `CLAUDE.md` и `spec/README.md`.
+`spec/` — актуальная концепция, читать в первую очередь. Корневые `how-it-works-now.md`, `how-it-should-work-backlog.md`, `roadmap.md` — архив старой (апрельской) концепции, больше не пополняются. Подробности — в `CLAUDE.md` и `spec/README.md`.
+
+## Задачи и доска
+
+`backlog.md` — что из `spec/` уже согласовано и готово к реализации. `SCRUMBAN.md` — рабочая доска (Backlog/Ready/In Progress/Review/Blocked/Done), ведётся через Claude Code skill `scrumban`.
 
 ## Содержимое
 
 ```
 botik-docs/
-├── how-it-works-now.md              — устарело (старая концепция)
-├── how-it-should-work-backlog.md    — устарело (актуален только блок 🔴)
-├── roadmap.md                       — устарело (старая концепция)
+├── backlog.md                       — задачи на реализацию (новая концепция)
+├── SCRUMBAN.md                       — рабочая доска
+├── how-it-works-now.md              — архив (старая концепция)
+├── how-it-should-work-backlog.md    — архив (актуальный пункт перенесён в backlog.md)
+├── roadmap.md                       — архив (старая концепция)
 ├── meetings/                        — конспекты встреч, один файл на встречу
 ├── spec/                            — актуальная концепция + уточнения
 │   └── clarifications/              — уточнения по темам
