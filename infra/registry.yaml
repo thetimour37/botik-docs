@@ -12,7 +12,7 @@ units:
       явному решению пользователя (не автоматически).
     status: active
     owner: Тимур
-    updated: 2026-09-02
+    updated: 2026-09-15
 
   - id: repo-botik-docs
     type: repository
@@ -45,7 +45,7 @@ units:
       автодеплоя — в панели Railway, не в коде репозитория).
     status: active
     owner: Тимур
-    updated: 2026-09-02
+    updated: 2026-09-15
 
   - id: db-botik-pg
     type: service
