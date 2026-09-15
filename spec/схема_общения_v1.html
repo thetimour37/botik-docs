@@ -231,11 +231,11 @@
 
 <!-- БЛОК 1 -->
 <div class="block">
-  <h2><span class="num">1</span> Контракт — один раз на старте</h2>
-  <div class="caption">Три вопроса с кнопками. Настраиваем, как бот будет вести себя дальше.</div>
+  <h2><span class="num">1</span> Контракт — один раз на старте <span class="tag ok">согласовано 2026-09-15</span></h2>
+  <div class="caption">Один вопрос с кнопками. Напоминания и реакция на молчание больше не спрашиваются на старте — работают по дефолту (см. Блок 5).</div>
 
   <div class="step">
-    <div class="label">Вопрос 1 — время вечернего резюме</div>
+    <div class="label">Вопрос — время вечернего резюме</div>
     <div class="quote">«В какое время тебе удобно получать вечернее резюме?»</div>
     <div class="btns">
       <span class="btn">19:00</span>
@@ -246,30 +246,11 @@
     </div>
   </div>
 
-  <div class="step">
-    <div class="label">Вопрос 2 — напоминания днём</div>
-    <div class="quote">«Хочешь получать напоминания, если не писал наблюдений до вечера?»</div>
-    <div class="btns">
-      <span class="btn">Да, напоминай</span>
-      <span class="btn">Нет, сам напишу</span>
-    </div>
-  </div>
-
-  <div class="step">
-    <div class="label">Вопрос 3 — молчание 3 дня</div>
-    <div class="quote">«Если ты не пишешь 3 дня — что мне делать?»</div>
-    <div class="btns">
-      <span class="btn">Напомни мне</span>
-      <span class="btn">Поставь на паузу</span>
-      <span class="btn">Ничего не делай</span>
-    </div>
-  </div>
-
-  <h3>Дефолты (если пропустил контракт)</h3>
+  <h3>Дефолты</h3>
   <div class="grid">
-    <div class="card"><div class="k">Время резюме</div><div class="v">20:00</div></div>
-    <div class="card"><div class="k">Напоминания</div><div class="v">Включены</div></div>
-    <div class="card"><div class="k">Молчание 3 дня</div><div class="v">Спросить «продолжаем?»</div></div>
+    <div class="card"><div class="k">Время резюме (если пропустил контракт)</div><div class="v">20:00</div></div>
+    <div class="card"><div class="k">Напоминания</div><div class="v">Включены (не выбираются на старте)</div></div>
+    <div class="card"><div class="k">Молчание 3 дня</div><div class="v">Стандартный сценарий (не выбирается на старте)</div></div>
   </div>
   <div class="note">Настройки можно поменять в любой момент через <b>/settings</b>.</div>
 </div>
