@@ -41,6 +41,7 @@
       DoD: письменное решение зафиксировано в `~/llm-wiki/wiki/projects/botik/decisions/YYYY-MM-DD-assembly-strategy.md`.
 - [ ] [P1] #6 @team · Придумать название для бота
       DoD: выбрано одно имя, зафиксировано в `decisions/`. Разблокирует будущий rebranding (см. IDEAS #8).
+
 ## IN PROGRESS  (@nastya 1/2 · @timur 1/2 · @team 0/1)
 
 - [ ] [P1] #7 @nastya · Проверить схему общения, дать замечания по 7 блокам
