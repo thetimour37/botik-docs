@@ -6,15 +6,16 @@
 
 - **Сквозная численная нумерация**, без буквенного префикса исполнителя. Формат: `#N` (например `#7`, `#17`).
 - Исполнитель — в поле `@nastya` / `@timur` / `@team` (совместные), не в id.
-- Legacy-ID (N-1, T-3, TN-1 из старой нумерации) сохранены в frontmatter карточек в `~/llm-wiki/wiki/projects/botik/tasks/` как `legacy_id`.
+- Legacy-ID (N-1, T-3, TN-1 из старой нумерации) сохранены в frontmatter карточек в `tasks/` как `legacy_id`.
 
 ## Источник истины
 
 - **`SCRUMBAN.md`** (этот файл) — рабочая доска, состояние потока, WIP.
 - **`backlog.md`** — трассировка к `spec/`, полные критерии, блокеры (тонкий комментарий на задачу).
-- **`~/llm-wiki/wiki/projects/botik/tasks/N-slug.md`** — расширенный контекст (What / Why / Done when / Notes).
+- **`tasks/<N>-<slug>.md`** — расширенный контекст задачи (What / Why / Done when / Notes).
+- **`ideas/<N>-<slug>.md`** — карточки задач, переведённых в «идеи» (вне активного потока).
 
-Приоритет чтения: `SCRUMBAN.md` → `backlog.md` (или карточка в llm-wiki) → `spec/`.
+Приоритет чтения: `SCRUMBAN.md` → `backlog.md` → карточка в `tasks/` → `spec/`.
 
 ---
 
@@ -38,7 +39,7 @@
 - [ ] [P1] #17 @nastya · Формулировка вопроса про время резюме
       DoD: 1–2 варианта финальной формулировки, согласовано с Тимуром, внесено в `spec/схема_старта_v1.html`.
 - [ ] [P1] #18 @team · Обсудить стратегию сборки (одна петля vs шире с v0.1)
-      DoD: письменное решение зафиксировано в `~/llm-wiki/wiki/projects/botik/decisions/YYYY-MM-DD-assembly-strategy.md`.
+      DoD: письменное решение зафиксировано в `~/llm-wiki/wiki/projects/botik/decisions/YYYY-MM-DD-assembly-strategy.md` (decisions пока в llm-wiki).
 - [ ] [P1] #6 @team · Придумать название для бота
       DoD: выбрано одно имя, зафиксировано в `decisions/`. Разблокирует будущий rebranding (см. IDEAS #8).
 
@@ -72,4 +73,4 @@
 
 ## IDEAS (вне активного потока)
 
-- #8 @timur · Переименовать бота через BotFather и в коде — переведено 2026-09-14, ожидает актуальности после #6.
+- #8 @timur · Переименовать бота через BotFather и в коде — переведено 2026-09-14, ожидает актуальности после #6. Файл: `ideas/8-bot-rename-botfather.md`.
