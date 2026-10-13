@@ -8,7 +8,7 @@ priority: P1
 assignee: Тимур
 aligned: false
 tags: [botik, spec, review, communication]
-source: botik-docs/spec/схема_общения_v1.html
+source: botik-docs/spec/схема_общения_v1.md
 project: botik
 related: [7-review-communication-scheme-nastya]
 ---
@@ -17,7 +17,7 @@ related: [7-review-communication-scheme-nastya]
 
 ## What
 
-Пройти визуальный HTML-документ со схемой общения (`botik-docs/spec/схема_общения_v1.html`), сверить с текущей `spec/спецификация_взаимодействия_v1.md`. Собрать замечания Насти по [[7-review-communication-scheme-nastya]] и внести правки в основную спеку.
+Пройти визуальный HTML-документ со схемой общения (`botik-docs/spec/схема_общения_v1.md`), сверить с текущей `spec/спецификация_взаимодействия_v1.md`. Собрать замечания Насти по [[7-review-communication-scheme-nastya]] и внести правки в основную спеку.
 
 ## Why
 
