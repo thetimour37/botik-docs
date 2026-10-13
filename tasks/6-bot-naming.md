@@ -8,7 +8,7 @@ priority: P1
 assignee: Тимур + Настя
 aligned: true
 tags: [botik, branding, naming]
-source: how-it-should-work-backlog.md (задача 1.5, разделена)
+source: old/how-it-should-work-backlog.md (задача 1.5, разделена)
 project: botik
 ---
 
@@ -20,7 +20,7 @@ project: botik
 
 ## Why
 
-Задача 1.5 из бэклога `how-it-should-work-backlog.md` разделена по решению Тимура (2026-09-02):
+Задача 1.5 из бэклога `old/how-it-should-work-backlog.md` разделена по решению Тимура (2026-09-02):
 - **6** (эта) — выбор названия — совместная работа Тимура + Насти.
 - **8** — техническое переименование через @BotFather и в коде — только Тимур, **зависит от 6**.
 

@@ -18,7 +18,7 @@ C:\Users\user\Documents\Obsidian Vault\Obsidian Vault\Ботик\botik-docs     
 
 ## ⚠️ Концепция пересмотрена (август 2026)
 
-`spec/` — актуальная концепция, читать в первую очередь. Корневые `how-it-works-now.md`, `how-it-should-work-backlog.md`, `roadmap.md` — архив старой (апрельской) концепции, больше не пополняются. Подробности — в `CLAUDE.md` и `spec/README.md`.
+`spec/` — актуальная концепция, читать в первую очередь. Устаревшие документы (старая апрельская концепция и заменённые файлы) лежат в `old/`, больше не пополняются. Подробности — в `CLAUDE.md` и `spec/README.md`.
 
 ## Задачи и доска
 
@@ -30,9 +30,7 @@ C:\Users\user\Documents\Obsidian Vault\Obsidian Vault\Ботик\botik-docs     
 botik-docs/
 ├── backlog.md                       — задачи на реализацию (новая концепция)
 ├── SCRUMBAN.md                       — рабочая доска
-├── how-it-works-now.md              — архив (старая концепция)
-├── how-it-should-work-backlog.md    — архив (актуальный пункт перенесён в backlog.md)
-├── roadmap.md                       — архив (старая концепция)
+├── old/                             — архив устаревших документов (см. old/README.md)
 ├── meetings/                        — конспекты встреч, один файл на встречу
 ├── spec/                            — актуальная концепция + уточнения
 │   └── clarifications/              — уточнения по темам

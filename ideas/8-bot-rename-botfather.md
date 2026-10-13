@@ -10,7 +10,7 @@ priority: P1
 assignee: Тимур
 aligned: true
 tags: [botik, botfather, deploy, rename, idea]
-source: how-it-should-work-backlog.md (задача 1.5, разделена)
+source: old/how-it-should-work-backlog.md (задача 1.5, разделена)
 project: botik
 ---
 
