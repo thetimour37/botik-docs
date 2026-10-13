@@ -11,6 +11,7 @@
 | `how-it-should-work-backlog.md` | 2026-10-13 | старая концепция; единственный актуальный пункт (1.5) перенесён в `backlog.md` | `backlog.md`, Linear |
 | `spec/схема_дня_v2.md` | 2026-10-13 | влита в спецификацию (Блоки 3–5) | `spec/спецификация_взаимодействия_v1.md` |
 | `product/lean_canvas_botik_20260810.html` | 2026-10-13 | устаревшая версия canvas | `product/lean_canvas_botik_v2.md` |
+| `product/схема общения.html` | 2026-10-13 | заглушка со ссылкой на диаграмму старой машины состояний (normal / reflection / rare_reminders / pause) | `spec/схема_общения_v1.md` |
 
 ## Как добавить файл в архив
 
