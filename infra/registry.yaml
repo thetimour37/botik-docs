@@ -59,10 +59,15 @@ units:
     access: [Тимур]
     description: >
       Подключение через переменную окружения DATABASE_PUBLIC_URL, доступ из
-      кода через asyncpg-пул (database.py).
+      кода через asyncpg-пул (database.py). С 2026-10-14 схема расширена
+      (database_v2.py): колонки новой логики в users (flow_version, bot_mode,
+      engagement_state и др.), таблицы requests, focuses, request_scores,
+      sessions, fsm_storage; бэкапы строк перед сбросом — users_backup_ГГГГММДД.
+      Локально DATABASE_PUBLIC_URL не задана: прямого доступа к боевой БД с
+      рабочей машины нет.
     status: active
     owner: Тимур
-    updated: 2026-09-02
+    updated: 2026-10-14
 
   - id: bot-anastasia
     type: telegram_bot
@@ -78,7 +83,13 @@ units:
       Токен — TELEGRAM_BOT_TOKEN (Railway env). Переименование бота
       запланировано, но не выполнено (backlog 1.5, устаревшая концепция).
       Служебные команды (/debug, /simulate*, /resetonboarding) доступны только
-      id из ADMIN_IDS (с 2026-10-14).
+      id из ADMIN_IDS (с 2026-10-14). С 2026-10-14 (итерация 2 PLAN.md) две
+      логики в одном процессе: старая (v1, существующие пользователи) и новая
+      (v2, handlers/v2.py — новые пользователи с flow_version=2); планировщик
+      v1 работает только со старой логикой. FSM хранится в PostgreSQL
+      (таблица fsm_storage). Меню команд задаётся из кода (set_my_commands:
+      /rules, /help, /support). Админ-команды добавлены: /setmode2all,
+      /resetv2, /profile и /profileupdate (только админам).
     status: active
     owner: Тимур
     updated: 2026-10-14
