@@ -45,7 +45,10 @@ units:
       автодеплоя — в панели Railway, не в коде репозитория). Переменные
       окружения: TELEGRAM_BOT_TOKEN, ANTHROPIC_API_KEY, DATABASE_PUBLIC_URL,
       ADMIN_IDS (с 2026-10-14: id администраторов через запятую, открывает
-      служебные команды /debug, /simulate*, /resetonboarding).
+      служебные команды /debug, /simulate*, /resetonboarding). Зависимости —
+      requirements.txt (Railway ставит при сборке); с 2026-10-14 (итерация 8)
+      добавлен matplotlib — графики недельного резюме рисуются в PNG без
+      дисплея (backend Agg), новых переменных окружения не требуется.
     status: active
     owner: Тимур
     updated: 2026-10-14
@@ -89,7 +92,9 @@ units:
       v1 работает только со старой логикой. FSM хранится в PostgreSQL
       (таблица fsm_storage). Меню команд задаётся из кода (set_my_commands:
       /rules, /help, /support). Админ-команды добавлены: /setmode2all,
-      /resetv2, /profile и /profileupdate (только админам).
+      /resetv2, /profile и /profileupdate (только админам). Планировщик v2
+      (раз в минуту): срок Блока 2, утро пн–пт 9:00, вечер, суббота 9:00 GMT+3 —
+      недельное резюме с графиком (итерация 8, handlers/weekly.py).
     status: active
     owner: Тимур
     updated: 2026-10-14
