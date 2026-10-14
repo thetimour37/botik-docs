@@ -49,6 +49,11 @@ units:
       requirements.txt (Railway ставит при сборке); с 2026-10-14 (итерация 8)
       добавлен matplotlib — графики недельного резюме рисуются в PNG без
       дисплея (backend Agg), новых переменных окружения не требуется.
+      Необязательные переменные новой логики (итерация 7): SILENCE_DAYS и
+      MAX_SILENCE_CHECKS (по умолчанию 3/3). Итерация 11: новых переменных нет;
+      массовый перевод пользователей на новую логику — из бота командой
+      /resetv2 all или `railway run python scripts/reset_to_v2.py --all-legacy`
+      (dry-run, затем --apply).
     status: active
     owner: Тимур
     updated: 2026-10-14
@@ -65,7 +70,10 @@ units:
       кода через asyncpg-пул (database.py). С 2026-10-14 схема расширена
       (database_v2.py): колонки новой логики в users (flow_version, bot_mode,
       engagement_state и др.), таблицы requests, focuses, request_scores,
-      sessions, fsm_storage; бэкапы строк перед сбросом — users_backup_ГГГГММДД.
+      sessions, fsm_storage; затем (итерации 5–10) observations, future_topics,
+      session_messages, monthly_summaries и колонки этапов вечера, субботы,
+      месячного среза. Бэкапы строк перед сбросом — users_backup_ГГГГММДД_ЧЧММСС
+      (своя таблица на каждый сброс, в том числе массовый /resetv2 all).
       Локально DATABASE_PUBLIC_URL не задана: прямого доступа к боевой БД с
       рабочей машины нет.
     status: active
@@ -81,8 +89,20 @@ units:
     connects_to: [db-botik-pg, api-anthropic]
     access: [Тимур, Анастасия]
     description: >
-      aiogram 3, FSM-логика и обработчики в main.py, планировщик APScheduler
-      (вечерняя рефлексия 16:00 UTC, недельные/месячные/годовые итоги).
+      aiogram 3. С 2026-10-14 (итерация 11 PLAN.md — переключение) основная
+      логика — новая (режим 2, «осознанная рефлексия», handlers/*.py):
+      онбординг и контракт (вечер 18:00–22:30, по умолчанию 20:00), запрос и
+      оценка 1–10, фокус недели, ежедневный сбор наблюдений (отражение на
+      первые 3 в день, дальше 👍), вечернее резюме пн–пт, машина молчания
+      (active/checking/paused/dormant), суббота 9:00 GMT+3 — недельное резюме
+      со звёздочками и графиком (matplotlib), выбор фокуса, сессия с психологом
+      (час), месячный срез в первую субботу месяца, команды /focus,
+      /dashboard (текст + график), /session, /pause, /settings. Старая логика
+      (v1, main.py) остаётся для пользователей с flow_version=1 до массового
+      перевода (/resetv2 all) и для служебного режима 1 (bot_mode='free');
+      её удаление — итерация 12.
+      Исторически: FSM-логика и обработчики v1 в main.py, планировщик v1
+      (вечерняя рефлексия, недельные/месячные/годовые итоги, молчание, полночь).
       Токен — TELEGRAM_BOT_TOKEN (Railway env). Переименование бота
       запланировано, но не выполнено (backlog 1.5, устаревшая концепция).
       Служебные команды (/debug, /simulate*, /resetonboarding) доступны только
@@ -90,11 +110,22 @@ units:
       логики в одном процессе: старая (v1, существующие пользователи) и новая
       (v2, handlers/v2.py — новые пользователи с flow_version=2); планировщик
       v1 работает только со старой логикой. FSM хранится в PostgreSQL
-      (таблица fsm_storage). Меню команд задаётся из кода (set_my_commands:
-      /rules, /help, /support). Админ-команды добавлены: /setmode2all,
-      /resetv2, /profile и /profileupdate (только админам). Планировщик v2
-      (раз в минуту): срок Блока 2, утро пн–пт 9:00, вечер, суббота 9:00 GMT+3 —
-      недельное резюме с графиком (итерация 8, handlers/weekly.py).
+      (таблица fsm_storage). Меню команд задаётся из кода (services/menu.py,
+      при запуске): по умолчанию — меню режима 2 (/focus, /dashboard,
+      /session, /pause, /settings, /rules, /help, /support), если в БД не
+      осталось flow_version=1, иначе старое (/rules, /help, /support);
+      пользователям v2 — меню режима 2 на их чат. BotFather вручную не
+      настраивается. Админ-команды: /setmode2all, /resetv2 [id …],
+      /resetv2 all (массовый перевод, итерация 11), /profile и /profileupdate,
+      /simulateweek и /simulatemonth (для v2). Отчёт админам при запуске
+      показывает, сколько пользователей ещё на старой логике.
+      Планировщик v2 (каждую минуту, опрос БД): срок Блока 2
+      (trigger_block2_deadlines), утро пн–пт 9:00 (trigger_morning_messages),
+      вечер по контракту (trigger_evenings), конец сессии через час
+      (trigger_sessions), суббота 9:00 GMT+3 и таймеры субботы
+      (trigger_weekly), шаги месячного среза (trigger_monthly). Планировщик
+      v1 (молчание 9:00, полночь, итоги вс/1-е/1 янв, вечерняя рефлексия)
+      остаётся и работает только со старой логикой.
     status: active
     owner: Тимур
     updated: 2026-10-14
