@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Анализ на успешность — Ботик</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7;
+    --surface-1: #fcfcfb;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --grid: #e1e0d9;
+    --axis: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --chip-bg: #eeede8;
+    --accent: #2a78d6;
+    --good: #0ca30c;     --good-text: #006300;
+    --warn: #fab219;     --warn-text: #7a5400;
+    --serious: #ec835a;  --serious-text: #8a3a14;
+    --critical: #d03b3b; --critical-text: #a02a2a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --page: #0d0d0d; --surface-1: #1a1a19;
+      --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #898781;
+      --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+      --chip-bg: #262624; --accent: #3987e5;
+      --good-text: #0ca30c; --warn-text: #fab219; --serious-text: #ec835a; --critical-text: #e66767;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface-1: #1a1a19;
+    --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+    --chip-bg: #262624; --accent: #3987e5;
+    --good-text: #0ca30c; --warn-text: #fab219; --serious-text: #ec835a; --critical-text: #e66767;
+  }
+
+  * { box-sizing: border-box; }
+  html { background: var(--page); }
+  body { margin: 0; background: var(--page); color: var(--text-primary);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 24px 16px 64px; }
+
+  .badge { display: inline-block; font-size: 12px; color: var(--text-secondary);
+    background: var(--chip-bg); border-radius: 999px; padding: 2px 10px; margin-bottom: 8px; }
+  h1 { font-size: 26px; line-height: 1.25; margin: 0 0 6px; font-weight: 600; }
+  .sub { color: var(--text-secondary); margin: 0 0 20px; }
+  h2 { font-size: 18px; margin: 0 0 4px; font-weight: 600; }
+  .lede { color: var(--text-secondary); font-size: 14px; margin: 0 0 14px; }
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px;
+    padding: 20px; margin-bottom: 16px; }
+  .eyebrow { font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 6px; }
+
+  /* verdict */
+  .verdict { font-size: 19px; line-height: 1.4; font-weight: 600; margin: 0 0 12px; }
+  .two { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 720px) { .two { grid-template-columns: 1fr 1fr; } }
+  .callout { border-left: 3px solid var(--axis); padding: 2px 0 2px 12px; }
+  .callout p { margin: 0; font-size: 14px; color: var(--text-secondary); }
+  .callout b { color: var(--text-primary); }
+
+  /* status chip: icon + label, never colour alone */
+  .st { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+  .st i { font-style: normal; display: inline-grid; place-items: center; width: 18px; height: 18px;
+    border-radius: 50%; font-size: 11px; color: #0b0b0b; }
+  .st.ok { color: var(--good-text); }       .st.ok i { background: var(--good); }
+  .st.part { color: var(--warn-text); }     .st.part i { background: var(--warn); }
+  .st.bad { color: var(--serious-text); }   .st.bad i { background: var(--serious); }
+  .st.crit { color: var(--critical-text); } .st.crit i { background: var(--critical); color: #fff; }
+
+  /* goals scorecard */
+  .goal { display: grid; grid-template-columns: 1fr; gap: 4px; padding: 12px 0; border-top: 1px solid var(--grid); }
+  .goal:first-of-type { border-top: 0; }
+  @media (min-width: 720px) { .goal { grid-template-columns: 220px 150px 1fr; gap: 16px; align-items: start; } }
+  .goal b { font-weight: 600; }
+  .goal p { margin: 0; color: var(--text-secondary); font-size: 14px; }
+
+  /* timeline */
+  .tl { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  @media (min-width: 720px) { .tl { grid-template-columns: repeat(4, 1fr); } }
+  .ph { border: 1px solid var(--grid); border-radius: 12px; padding: 14px; position: relative; }
+  .ph::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; border-radius: 12px 0 0 12px; background: var(--axis); }
+  .ph.ok::before { background: var(--good); }
+  .ph.part::before { background: var(--warn); }
+  .ph.crit::before { background: var(--critical); }
+  .ph h3 { margin: 0 0 2px; font-size: 14px; font-weight: 600; }
+  .ph .when { font-size: 12px; color: var(--text-muted); margin: 0 0 8px; }
+  .ph p { margin: 8px 0 0; font-size: 13.5px; color: var(--text-secondary); }
+
+  /* risks */
+  .risk { display: grid; grid-template-columns: 28px 1fr; gap: 10px; padding: 12px 0; border-top: 1px solid var(--grid); }
+  .risk:first-of-type { border-top: 0; }
+  .risk .n { font-size: 13px; color: var(--text-muted); padding-top: 2px; }
+  .risk h3 { margin: 0 0 2px; font-size: 15px; font-weight: 600; }
+  .risk p { margin: 0; font-size: 14px; color: var(--text-secondary); }
+  .risk .meta { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .tag { font-size: 12px; background: var(--chip-bg); color: var(--text-secondary); border-radius: 999px; padding: 1px 9px; }
+
+  /* matrix */
+  .tablewrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th, td { text-align: left; padding: 8px 10px; border-top: 1px solid var(--grid); vertical-align: top; }
+  th { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; border-top: 0; }
+  td.c { text-align: center; }
+
+  /* recs */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+  .filters button, .dec select {
+    font: inherit; font-size: 13.5px; color: var(--text-primary); background: transparent;
+    border: 1px solid var(--axis); border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+  .filters button[aria-pressed="true"] { background: var(--text-primary); color: var(--surface-1); border-color: var(--text-primary); }
+  .filters button:focus-visible, .dec select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .rec { border: 1px solid var(--grid); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+  .rec .hd { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .rec .no { font-size: 13px; color: var(--text-muted); }
+  .rec h3 { margin: 0; font-size: 15px; font-weight: 600; flex: 1 1 260px; }
+  .rec p { margin: 6px 0 0; font-size: 14px; color: var(--text-secondary); }
+  .rec .meta { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .dec { margin-left: auto; font-size: 13px; color: var(--text-secondary); display: flex; gap: 8px; align-items: center; }
+  .dec select { border-radius: 8px; padding: 4px 8px; background: var(--surface-1); }
+  .progress { font-size: 14px; color: var(--text-secondary); margin: 0 0 12px; }
+  .bar { height: 8px; background: var(--chip-bg); border-radius: 4px; overflow: hidden; margin-top: 6px; }
+  .bar > span { display: block; height: 100%; background: var(--accent); width: 0; }
+
+  /* checks */
+  ul.plain { margin: 0; padding-left: 20px; color: var(--text-secondary); font-size: 14px; }
+  ul.plain li { margin: 4px 0; }
+  footer { color: var(--text-muted); font-size: 12.5px; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <span class="badge">Задача BOT-31 · для обсуждения Насти и Тимура</span>
+  <h1>Анализ на успешность</h1>
+  <p class="sub">Насколько схема по спецификации (13 октября 2026) отвечает концепции и какой будет удовлетворённость пользователя</p>
+
+  <!-- 1. Вердикт -->
+  <section class="card" aria-labelledby="v-h">
+    <p class="eyebrow" id="v-h">Вердикт</p>
+    <p class="verdict">Схема хорошо решает «без напряжения» и лишь средне — «ценность очевидна и растёт со временем».</p>
+    <div class="two">
+      <div class="callout"><p><b>Сильное.</b> Низкая нагрузка, выходные как пауза, молчание без давления, накопление материала и сессия с контекстом.</p></div>
+      <div class="callout"><p><b>Главный риск.</b> Почти весь результат пользователь видит раз в месяц, и он может оказаться нулевым — а второй шкалы, которая это смягчит, пока нет.</p></div>
+    </div>
+  </section>
+
+  <!-- 2. Цели концепции -->
+  <section class="card" aria-labelledby="g-h">
+    <h2 id="g-h">Соответствие целям концепции</h2>
+    <p class="lede">Пять целей из принципа «долгое использование без напряжения».</p>
+    <div>
+      <div class="goal"><b>Долго и без напряжения</b><span class="st ok"><i>✓</i>Отвечает</span>
+        <p>5–10 минут в день, выходные паузой, «пропускать нормально», молчание без давления (машина состояний).</p></div>
+      <div class="goal"><b>Понимание ценности</b><span class="st part"><i>!</i>Частично</span>
+        <p>Нет еженедельного показателя результата. Звёздочки измеряют поведение, а не пользу.</p></div>
+      <div class="goal"><b>Адаптивная скорость</b><span class="st part"><i>!</i>Частично</span>
+        <p>Подстройка бинарная: «продолжаю» или «пауза». <code>preferred_format</code> сохраняется и нигде не используется.</p></div>
+      <div class="goal"><b>Накопление материала</b><span class="st ok"><i>✓</i>Отвечает</span>
+        <p>Ежедневный сбор, недельные и месячные срезы, сессия с накопленным контекстом.</p></div>
+      <div class="goal"><b>Расширение запросов и история</b><span class="st part"><i>!</i>Частично</span>
+        <p>Идея есть, механики нет: как закрывается запрос и кто решает о переходе к следующему.</p></div>
+    </div>
+  </section>
+
+  <!-- 3. Прогноз -->
+  <section class="card" aria-labelledby="t-h">
+    <h2 id="t-h">Прогноз удовлетворённости по этапам</h2>
+    <p class="lede">Качественная гипотеза по спецификации, не измерение. Проверять на тестировщиках v0.x.</p>
+    <div class="tl">
+      <div class="ph ok">
+        <h3>Неделя 1</h3><p class="when">Онбординг и старт</p>
+        <span class="st ok"><i>✓</i>Умеренно-высокая</span>
+        <p>Низкая нагрузка, тёплый тон. Риск отсева: до первой пользы идут приветствие, инструкция, контракт, запрос, оценка и диалог о фокусе (до 20 сообщений).</p>
+      </div>
+      <div class="ph part">
+        <h3>Недели 2–4</h3><p class="when">Рутина без результата</p>
+        <span class="st bad"><i>!</i>Возможный провал</span>
+        <p>Дни похожи, оценок нет, обратная связь только вечером. Звёздочки не отвечают на вопрос «помогает ли мне это».</p>
+      </div>
+      <div class="ph crit">
+        <h3>Конец месяца</h3><p class="when">Первая месячная оценка</p>
+        <span class="st crit"><i>!</i>Критическая точка</span>
+        <p>Единственный измеримый итог. Если «хочу замуж» осталось 0→0, человек видит «ничего не изменилось».</p>
+      </div>
+      <div class="ph part">
+        <h3>3+ месяца</h3><p class="when">Удержание</p>
+        <span class="st part"><i>!</i>Зависит от истории</span>
+        <p>Держит история запросов и дашборд, но у них пока нет формы и правил закрытия запроса.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Риски -->
+  <section class="card" aria-labelledby="r-h">
+    <h2 id="r-h">Главные риски</h2>
+    <p class="lede">Десять мест, где схема может расходиться с ожиданием пользователя.</p>
+
+    <div class="risk"><span class="n">1</span><div><h3>Нет «зрелой» метрики прогресса</h3>
+      <p>Вторую шкалу (внутреннее состояние) нельзя добавить задним числом: сравнивать будет не с чем.</p>
+      <div class="meta"><span class="st crit"><i>!</i>Критичный</span></div></div></div>
+
+    <div class="risk"><span class="n">2</span><div><h3>Запрос-цель против фокуса-наблюдения</h3>
+      <p>«Хочу замуж» — желаемый результат, а по глоссарию фокус не цель. Оценка запроса становится оценкой события в жизни, а не динамики пользователя.</p>
+      <div class="meta"><span class="st bad"><i>!</i>Высокий</span></div></div></div>
+
+    <div class="risk"><span class="n">3</span><div><h3>Текст экрана 0.2 противоречит новой схеме</h3>
+      <p>Описывает запрос как недельный («запрос на неделю», «выбираем новый запрос»), а запрос теперь долгий.</p>
+      <div class="meta"><span class="st bad"><i>!</i>Высокий</span></div></div></div>
+
+    <div class="risk"><span class="n">4</span><div><h3>Суббота перегружена</h3>
+      <p>Резюме, сообщение про отдых, приглашение на сессию, выбор из 5 вариантов фокуса, раз в месяц ещё оценка запроса. Противоречит идее выходных как отдыха от рефлексии.</p>
+      <div class="meta"><span class="st bad"><i>!</i>Высокий</span></div></div></div>
+
+    <div class="risk"><span class="n">5</span><div><h3>«Неиспользованная сессия сгорает»</h3>
+      <p>Это потеря, а не мягкое приглашение — конфликт с «без напряжения». Час подряд и часовые пояса добавляют трения.</p>
+      <div class="meta"><span class="st bad"><i>!</i>Высокий</span></div></div></div>
+
+    <div class="risk"><span class="n">6</span><div><h3>Давление звёздочками</h3>
+      <p>«Ни одного дня не пропустил, вот единорог» создаёт серию, которую страшно прервать, и конфликтует с «пропускаешь день — ничего страшного». Тон может показаться детским.</p>
+      <div class="meta"><span class="st part"><i>!</i>Средний</span></div></div></div>
+
+    <div class="risk"><span class="n">7</span><div><h3>Нет выхода у запроса</h3>
+      <p>Нет критерия «проработан», нет ежемесячного «оставить / закрыть / сменить», нет правила на случай раннего ухода от запроса.</p>
+      <div class="meta"><span class="st bad"><i>!</i>Высокий</span></div></div></div>
+
+    <div class="risk"><span class="n">8</span><div><h3>Эмодзи с 4-го сообщения</h3>
+      <p>Длинное наблюдение получает 👍 — риск «меня не слышат». Механика не согласована с Настей.</p>
+      <div class="meta"><span class="st part"><i>!</i>Средний</span><span class="tag">проверить на тестировщиках</span></div></div></div>
+
+    <div class="risk"><span class="n">9</span><div><h3>Молчание после <code>dormant</code> и <code>paused</code></h3>
+      <p>Без таймера и возвращающего хода часть пользователей уйдёт навсегда. Для «долгого использования» это дорого.</p>
+      <div class="meta"><span class="st part"><i>!</i>Средний</span></div></div></div>
+
+    <div class="risk"><span class="n">10</span><div><h3>Безопасность: кризисные номера</h3>
+      <p>Номера и подписи в текстах не проверены (BOT-26), тексты в бота пока не подключены.</p>
+      <div class="meta"><span class="st crit"><i>!</i>Критичный</span><span class="tag">BOT-26</span></div></div></div>
+  </section>
+
+  <!-- 5. Матрица -->
+  <section class="card" aria-labelledby="m-h">
+    <h2 id="m-h">Какой риск закрывает какая рекомендация</h2>
+    <p class="lede">Риск 8 закрывается только проверкой на тестировщиках. Рекомендации 10, 12 и 13 закрывают узкие места отдельно (старт, дашборд, вечер).</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Риск</th><th>Рекомендации</th></tr></thead>
+        <tbody>
+          <tr><td>1. Нет метрики прогресса</td><td>№1 вторая шкала на старте, №6 «что заметил бот»</td></tr>
+          <tr><td>2. Запрос-цель</td><td>№2 запрос как наблюдаемая тема</td></tr>
+          <tr><td>3. Экран 0.2</td><td>№3 переписать текст у Насти</td></tr>
+          <tr><td>4. Суббота перегружена</td><td>№4 разгрузить субботу</td></tr>
+          <tr><td>5. Сессия сгорает</td><td>№5 мягкая сессия</td></tr>
+          <tr><td>6. Давление звёздочками</td><td>№9 тон звёздочек</td></tr>
+          <tr><td>7. Нет выхода у запроса</td><td>№8 «оставить / закрыть / сменить»</td></tr>
+          <tr><td>8. Эмодзи</td><td>проверка на тестировщиках</td></tr>
+          <tr><td>9. Молчание</td><td>№7 режимы нагрузки, №11 возвращающий ход</td></tr>
+          <tr><td>10. Кризисные номера</td><td>№14 проверить до подключения</td></tr>
+          <tr><td>Отсев на старте (неделя 1)</td><td>№10 короткий вход</td></tr>
+          <tr><td>Удержание на 3+ месяца</td><td>№12 минимальный дашборд, №8</td></tr>
+          <tr><td>Растягивание вечера</td><td>№13 потолок вопросов</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 6. Рекомендации -->
+  <section class="card" aria-labelledby="rec-h">
+    <h2 id="rec-h">Рекомендации</h2>
+    <p class="lede">Решение по каждой отмечается здесь для встречи. Выбор сохраняется только в этом браузере и не уходит в Linear.</p>
+    <div class="progress" id="progress"></div>
+    <div class="filters" id="filters" role="group" aria-label="Фильтр по приоритету"></div>
+    <div id="recs"></div>
+  </section>
+
+  <!-- 7. Проверка -->
+  <section class="card" aria-labelledby="c-h">
+    <h2 id="c-h">Что проверить на тестировщиках</h2>
+    <ul class="plain">
+      <li>Где пользователь «проседает»: онбординг, недели 2–3 или первая месячная оценка.</li>
+      <li>Как воспринимается эмодзи вместо ответа с 4-го сообщения.</li>
+      <li>Тон и частота звёздочек.</li>
+      <li>Понимает ли человек разницу между запросом и фокусом без объяснений.</li>
+    </ul>
+  </section>
+
+  <footer>Оценки усилия и ответственных в рекомендациях — предварительные, для обсуждения. Источник: спецификация взаимодействия и глоссарий в botik-docs (13 октября 2026), задача BOT-31.</footer>
+</div>
+
+<script>
+(function () {
+  var recs = [
+    { n: 1, p: 'high', t: 'Ввести вторую шкалу сразу и спросить её на старте',
+      d: 'Например, «как мне сейчас с этим» (1–10) рядом с оценкой запроса. Месячный отчёт покажет две линии: ситуация и самочувствие. Если запрос не сдвинулся, прогресс всё равно виден.',
+      e: 'M', who: 'Настя и Тимур', task: 'BOT-21, BOT-30' },
+    { n: 2, p: 'high', t: 'Формулировать запрос как наблюдаемую тему, а не результат',
+      d: '«Хочу замуж» → «мои отношения с близостью и выбором партнёра». Бот хранит оба варианта: исходный и рабочий.',
+      e: 'M', who: 'Настя и Тимур', task: 'BOT-21' },
+    { n: 3, p: 'high', t: 'Переписать экран 0.2: два уровня',
+      d: 'Запрос — долгая тема, фокус — на неделю. Убрать «запрос на неделю» и «выбираем новый запрос».',
+      e: 'S', who: 'Настя', task: 'BOT-17' },
+    { n: 4, p: 'high', t: 'Разгрузить субботу',
+      d: 'Резюме в субботу, выбор фокуса можно отложить до воскресенья вечером или понедельника; при отсутствии выбора фокус остаётся прежним (явное правило). Приглашение на сессию отдельным сообщением позже.',
+      e: 'M', who: 'Тимур и Настя', task: 'BOT-30' },
+    { n: 5, p: 'high', t: 'Мягкая сессия вместо «сгорает»',
+      d: 'Пропущенную можно один раз перенести или она остаётся доступной до следующего резюме. Нейтральный текст, опция короткой сессии на 20–30 минут.',
+      e: 'M', who: 'Настя и Тимур', task: 'BOT-22' },
+    { n: 6, p: 'mid', t: 'Еженедельный «признак ценности»',
+      d: 'Помимо звёздочек: фраза «что заметил бот на этой неделе» и сравнение с прошлой неделей без оценки.',
+      e: 'M', who: 'Тимур (промпт), Настя (тон)', task: 'BOT-30' },
+    { n: 7, p: 'mid', t: 'Режимы нагрузки',
+      d: 'В состоянии <code>checking</code> кроме «продолжаю / пауза» предложить «реже» (например, 3 дня в неделю) и использовать <code>preferred_format</code>.',
+      e: 'L', who: 'Тимур', task: 'BOT-25' },
+    { n: 8, p: 'mid', t: 'Выход из запроса раз в месяц',
+      d: 'Рядом с оценкой запроса: «оставить / закрыть как проработанный / сменить». Закрытый запрос уходит в историю дашборда.',
+      e: 'M', who: 'Настя и Тимур', task: 'BOT-30' },
+    { n: 9, p: 'mid', t: 'Тон звёздочек',
+      d: '«Неделя наблюдений» без серий и сравнений; пропуск не наказывать. Проверить формулировки на живых людях.',
+      e: 'S', who: 'Настя', task: 'BOT-30' },
+    { n: 10, p: 'mid', t: 'Короткий вход',
+      d: 'Начать с фокуса по умолчанию, остальное позже. Полный диалог о запросе предложить на 2–3-й день.',
+      e: 'M', who: 'Тимур и Настя', task: 'BOT-21' },
+    { n: 11, p: 'low', t: 'Один мягкий возвращающий ход для paused и dormant',
+      d: 'Через 3–4 недели, с согласия пользователя (opt-in). Решить вместе с психологом.',
+      e: 'S', who: 'Настя', task: 'BOT-25' },
+    { n: 12, p: 'low', t: 'Минимальный дашборд',
+      d: 'Текстовая история запросов и графики в чате — до решения о мини-приложении.',
+      e: 'M', who: 'Тимур', task: 'BOT-30' },
+    { n: 13, p: 'low', t: 'Потолок вечерних уточняющих вопросов',
+      d: 'Не более 2 вопросов за вечер (в спецификации открыт).',
+      e: 'S', who: 'Тимур и Настя', task: 'BOT-19' },
+    { n: 14, p: 'low', t: 'Проверить номера кризисных линий',
+      d: 'До подключения текстов в бота.',
+      e: 'S', who: 'Настя и Тимур', task: 'BOT-26' }
+  ];
+  var pri = { high: 'Высокий приоритет', mid: 'Средний приоритет', low: 'Низкий приоритет' };
+  var eff = { S: 'усилие: малое', M: 'усилие: среднее', L: 'усилие: большое' };
+  var KEY = 'bot31-decisions';
+  var decisions = {};
+  try { decisions = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { decisions = {}; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(decisions)); } catch (e) {} }
+
+  var filter = 'all';
+  var host = document.getElementById('recs');
+  var filtersHost = document.getElementById('filters');
+  var progress = document.getElementById('progress');
+
+  function renderFilters() {
+    var opts = [['all', 'Все (14)'], ['high', 'Высокий (5)'], ['mid', 'Средний (5)'], ['low', 'Низкий (4)']];
+    filtersHost.innerHTML = '';
+    opts.forEach(function (o) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = o[1];
+      b.setAttribute('aria-pressed', filter === o[0] ? 'true' : 'false');
+      b.addEventListener('click', function () { filter = o[0]; renderFilters(); renderRecs(); });
+      filtersHost.appendChild(b);
+    });
+  }
+  function renderProgress() {
+    var done = recs.filter(function (r) { return decisions[r.n]; }).length;
+    progress.innerHTML = 'Решено ' + done + ' из ' + recs.length + '<div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="' + recs.length + '" aria-valuenow="' + done + '"><span style="width:' + (done / recs.length * 100) + '%"></span></div>';
+  }
+  function renderRecs() {
+    host.innerHTML = '';
+    recs.filter(function (r) { return filter === 'all' || r.p === filter; }).forEach(function (r) {
+      var el = document.createElement('div');
+      el.className = 'rec';
+      el.innerHTML =
+        '<div class="hd"><span class="no">№' + r.n + '</span><h3>' + r.t + '</h3></div>' +
+        '<p>' + r.d + '</p>' +
+        '<div class="meta"><span class="tag">' + pri[r.p] + '</span><span class="tag">' + eff[r.e] + '</span>' +
+        '<span class="tag">' + r.who + '</span><span class="tag">' + r.task + '</span>' +
+        '<label class="dec">Решение <select data-n="' + r.n + '" aria-label="Решение по рекомендации ' + r.n + '">' +
+        '<option value="">не решено</option><option value="take">берём</option><option value="change">меняем</option><option value="skip">не берём</option></select></label></div>';
+      var sel = el.querySelector('select');
+      sel.value = decisions[r.n] || '';
+      sel.addEventListener('change', function () {
+        if (sel.value) decisions[r.n] = sel.value; else delete decisions[r.n];
+        save(); renderProgress();
+      });
+      host.appendChild(el);
+    });
+  }
+  renderFilters(); renderRecs(); renderProgress();
+})();
+</script>
+</body>
+</html>

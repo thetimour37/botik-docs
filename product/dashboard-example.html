@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мой прогресс — пример дашборда</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7;
+    --surface-1: #fcfcfb;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --grid: #e1e0d9;
+    --axis: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --seq-track: #cde2fb;
+    --good-text: #006300;
+    --chip-bg: #eeede8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --page: #0d0d0d;
+      --surface-1: #1a1a19;
+      --text-primary: #f0efec;
+      --text-secondary: #c3c2b7;
+      --text-muted: #898781;
+      --grid: #2c2c2a;
+      --axis: #383835;
+      --border: rgba(255,255,255,0.10);
+      --series-1: #3987e5;
+      --series-2: #d95926;
+      --seq-track: #184f95;
+      --good-text: #0ca30c;
+      --chip-bg: #262624;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface-1: #1a1a19;
+    --text-primary: #f0efec;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255,255,255,0.10);
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --seq-track: #184f95;
+    --good-text: #0ca30c;
+    --chip-bg: #262624;
+  }
+
+  * { box-sizing: border-box; }
+  html { background: var(--page); }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--text-primary);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 24px 16px 56px; }
+
+  header.top { margin-bottom: 20px; }
+  .badge-example {
+    display: inline-block; font-size: 12px; color: var(--text-secondary);
+    background: var(--chip-bg); border-radius: 999px; padding: 2px 10px; margin-bottom: 8px;
+  }
+  h1 { font-size: 24px; line-height: 1.25; margin: 0 0 4px; font-weight: 600; }
+  .sub { color: var(--text-secondary); margin: 0; }
+
+  .card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card h2 { font-size: 16px; font-weight: 600; margin: 0 0 2px; }
+  .card .lede { color: var(--text-secondary); font-size: 14px; margin: 0 0 14px; }
+  .eyebrow { font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 6px; }
+
+  /* top: query + hero */
+  .top-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 720px) { .top-grid { grid-template-columns: 1.4fr 1fr; align-items: center; } }
+  .query { font-size: 20px; line-height: 1.35; font-weight: 600; margin: 0 0 6px; }
+  .meta { color: var(--text-secondary); font-size: 14px; margin: 0; }
+  .hero { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .hero .num { font-size: 64px; line-height: 1; font-weight: 600; }
+  .hero .of { font-size: 20px; color: var(--text-secondary); }
+  .delta { color: var(--good-text); font-weight: 600; font-size: 15px; }
+  .hero-cap { color: var(--text-secondary); font-size: 14px; margin: 6px 0 0; }
+
+  .focus-now {
+    margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--grid);
+    display: flex; gap: 12px; align-items: flex-start; justify-content: space-between; flex-wrap: wrap;
+  }
+  .focus-now .txt { flex: 1 1 320px; }
+  .focus-now .f { font-size: 16px; margin: 0; }
+  button.ghost {
+    font: inherit; color: var(--text-primary); background: transparent;
+    border: 1px solid var(--axis); border-radius: 10px; padding: 8px 14px; cursor: pointer;
+  }
+  button.ghost:hover { background: var(--chip-bg); }
+  button.ghost:focus-visible { outline: 2px solid var(--series-1); outline-offset: 2px; }
+  #change-note {
+    display: none; margin-top: 12px; padding: 12px 14px; border-radius: 10px;
+    background: var(--chip-bg); color: var(--text-secondary); font-size: 14px; width: 100%;
+  }
+  #change-note.open { display: block; }
+
+  /* charts */
+  .chart { position: relative; width: 100%; }
+  .chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .two { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 720px) { .two { grid-template-columns: 1fr 1fr; } }
+  .chart-title { font-size: 14px; font-weight: 600; margin: 0; }
+  .chart-sub { font-size: 13px; color: var(--text-secondary); margin: 0 0 8px; }
+  .hit:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 1px; }
+  .axis-text { fill: var(--text-muted); font-size: 11px; font-family: inherit; }
+  .val-text { fill: var(--text-primary); font-size: 12px; font-weight: 600; font-family: inherit; }
+  #tip {
+    position: fixed; z-index: 10; pointer-events: none; display: none;
+    background: var(--text-primary); color: var(--surface-1);
+    font-size: 12.5px; line-height: 1.35; padding: 6px 9px; border-radius: 8px; max-width: 240px; white-space: pre-line;
+  }
+
+  /* weekly list = table view */
+  .rows { display: block; }
+  .row {
+    display: grid; grid-template-columns: 1fr; gap: 6px;
+    padding: 12px 0; border-top: 1px solid var(--grid);
+  }
+  .row:first-child { border-top: 0; }
+  @media (min-width: 720px) {
+    .row { grid-template-columns: 90px 1fr 120px 120px; gap: 16px; align-items: start; }
+    .row.head { padding: 0 0 8px; font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; }
+  }
+  .row.head { display: none; }
+  @media (min-width: 720px) { .row.head { display: grid; } }
+  .wk { font-size: 13px; color: var(--text-secondary); }
+  .wk b { display: block; color: var(--text-primary); font-size: 14px; font-weight: 600; }
+  .ftxt { margin: 0; }
+  .tag {
+    display: inline-block; font-size: 12px; color: var(--text-secondary);
+    background: var(--chip-bg); border-radius: 999px; padding: 1px 8px; margin-top: 4px;
+  }
+  .stars { font-size: 15px; letter-spacing: 1px; color: var(--text-secondary); white-space: nowrap; }
+  .stars .off { color: var(--axis); }
+  .lab { font-size: 12px; color: var(--text-muted); display: inline-block; min-width: 92px; }
+  @media (min-width: 720px) { .lab { display: none; } }
+
+  /* monthly */
+  .months { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 720px) { .months { grid-template-columns: 1fr 1fr; } }
+  .month { border: 1px solid var(--grid); border-radius: 12px; padding: 16px; }
+  .month .score { font-size: 28px; font-weight: 600; margin: 4px 0 8px; }
+  .month .score span { color: var(--text-secondary); font-size: 16px; font-weight: 400; }
+  .month p { margin: 0; color: var(--text-secondary); font-size: 14px; }
+
+  footer { color: var(--text-muted); font-size: 12.5px; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span class="badge-example">Пример макета · данные вымышленные</span>
+    <h1>Мой прогресс</h1>
+    <p class="sub">Анна · 2 месяца с ботом (с 17 августа) · по состоянию на 13 октября 2026</p>
+  </header>
+
+  <!-- Запрос, оценка, текущий фокус -->
+  <section class="card" aria-labelledby="q-h">
+    <div class="top-grid">
+      <div>
+        <p class="eyebrow" id="q-h">Мой запрос</p>
+        <p class="query">Хочу, чтобы в близких отношениях мне было спокойно, без постоянной тревоги</p>
+        <p class="meta">Работаем с 17 августа · 9-я неделя</p>
+      </div>
+      <div>
+        <div class="hero" aria-label="Оценка запроса сейчас 6 из 10">
+          <span class="num">6</span><span class="of">из 10</span>
+          <span class="delta">+3 с начала</span>
+        </div>
+        <p class="hero-cap">Последняя оценка запроса — 3 октября. Была 3 на старте.</p>
+      </div>
+    </div>
+    <div class="focus-now">
+      <div class="txt">
+        <p class="eyebrow">Фокус этой недели · 12–16 октября</p>
+        <p class="f">Как я реагирую на критику близких людей</p>
+      </div>
+      <button class="ghost" id="change-btn" aria-expanded="false" aria-controls="change-note">Сменить фокус</button>
+      <div id="change-note" role="note">
+        Фокус можно сменить в любой день: выбрать из предложенных ботом вариантов или назвать свой. Запрос при этом остаётся прежним.
+      </div>
+    </div>
+  </section>
+
+  <!-- Динамика оценки запроса -->
+  <section class="card" aria-labelledby="rate-h">
+    <h2 id="rate-h">Как менялась оценка запроса</h2>
+    <p class="lede">Оценка 1–10 ставится на старте и раз в месяц, в первую субботу.</p>
+    <div class="chart" id="chart-rating"></div>
+  </section>
+
+  <!-- Качество рефлексии -->
+  <section class="card" aria-labelledby="refl-h">
+    <h2 id="refl-h">Как идёт рефлексия</h2>
+    <p class="lede">Это не оценка тебя, а то, как складывается привычка наблюдать. Пропущенные дни — нормально.</p>
+    <div class="two">
+      <div>
+        <p class="chart-title">Регулярность</p>
+        <p class="chart-sub">Дней с наблюдениями из 5 будних, по неделям 1–8</p>
+        <div class="chart" id="chart-reg"></div>
+      </div>
+      <div>
+        <p class="chart-title">Объём</p>
+        <p class="chart-sub">Сообщений с наблюдениями, по неделям 1–8</p>
+        <div class="chart" id="chart-vol"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- История фокусов (таблица) -->
+  <section class="card" aria-labelledby="hist-h">
+    <h2 id="hist-h">Фокусы по неделям</h2>
+    <p class="lede">За 8 завершённых недель: 33 дня с наблюдениями из 40 будних, 134 наблюдения.</p>
+    <div class="rows" id="rows" role="table" aria-label="Фокусы и качество рефлексии по неделям"></div>
+  </section>
+
+  <!-- Месяцы -->
+  <section class="card" aria-labelledby="mon-h">
+    <h2 id="mon-h">Итоги месяцев</h2>
+    <p class="lede">Бот присылает их в первую субботу месяца вместо недельного резюме.</p>
+    <div class="months">
+      <div class="month">
+        <p class="eyebrow">Месяц 1 · 17 авг — 5 сен</p>
+        <p class="score">3 → 5 <span>оценка запроса</span></p>
+        <p>Тревога чаще всего появлялась, когда близкий человек долго не отвечал. Сначала приходило ощущение в теле, а мысли — уже потом.</p>
+      </div>
+      <div class="month">
+        <p class="eyebrow">Месяц 2 · 6 сен — 3 окт</p>
+        <p class="score">5 → 6 <span>оценка запроса</span></p>
+        <p>Стало больше моментов спокойствия. Всё чаще удавалось сказать, что нужно, прямо — не дожидаясь, пока тревога вырастет.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Пример по спецификации взаимодействия от 13 октября 2026. Форма дашборда (мини-приложение Telegram или HTML-файл), пороги звёздочек и вторая шкала пока не решены.
+  </footer>
+</div>
+
+<div id="tip" role="tooltip"></div>
+
+<script>
+(function () {
+  // ---------- данные (вымышленные) ----------
+  var weeks = [
+    { n: 1, range: '17–21 авг', days: 3, msgs: 9,  focus: 'Мои мысли и чувства, когда партнёр долго не отвечает', tag: 'Определён при старте' },
+    { n: 2, range: '24–28 авг', days: 4, msgs: 14, focus: 'Моменты, когда я молчу вместо того, чтобы сказать, чего хочу', tag: 'Предложен ботом' },
+    { n: 3, range: '31 авг – 4 сен', days: 4, msgs: 17, focus: 'Ситуации, в которых я извиняюсь первой', tag: 'Предложен ботом' },
+    { n: 4, range: '7–11 сен', days: 5, msgs: 22, focus: 'Что происходит в теле перед тем, как я начинаю тревожиться', tag: 'Предложен ботом' },
+    { n: 5, range: '14–18 сен', days: 3, msgs: 11, focus: 'Что происходит в теле перед тем, как я начинаю тревожиться', tag: 'Оставлен прежний' },
+    { n: 6, range: '21–25 сен', days: 4, msgs: 16, focus: 'Что мне нужно в моменты, когда я проверяю телефон', tag: 'Предложен ботом' },
+    { n: 7, range: '28 сен – 2 окт', days: 5, msgs: 24, focus: 'Ситуации, где я просила о помощи, и как это было', tag: 'Предложен ботом' },
+    { n: 8, range: '5–9 окт', days: 5, msgs: 21, focus: 'Моменты спокойствия в отношениях: что им предшествует', tag: 'Свой фокус' }
+  ];
+  var ratings = [
+    { date: new Date(2026, 7, 17), label: '17 авг', v: 3, what: 'Старт' },
+    { date: new Date(2026, 8, 5),  label: '5 сен',  v: 5, what: 'Итог 1-го месяца' },
+    { date: new Date(2026, 9, 3),  label: '3 окт',  v: 6, what: 'Итог 2-го месяца' }
+  ];
+  var today = new Date(2026, 9, 13);
+
+  // примерные пороги звёздочек объёма (в спецификации ещё не решены)
+  function volStars(m) { return m < 8 ? 1 : m < 13 ? 2 : m < 18 ? 3 : m < 23 ? 4 : 5; }
+  function stars(k) {
+    var s = '';
+    for (var i = 1; i <= 5; i++) s += i <= k ? '★' : '<span class="off">★</span>';
+    return s;
+  }
+
+  // ---------- список недель (табличный вид) ----------
+  var rows = document.getElementById('rows');
+  var html = '<div class="row head" role="row"><div role="columnheader">Неделя</div><div role="columnheader">Фокус</div><div role="columnheader">Регулярность</div><div role="columnheader">Объём</div></div>';
+  weeks.slice().reverse().forEach(function (w) {
+    html += '<div class="row" role="row">' +
+      '<div class="wk" role="cell"><b>Неделя ' + w.n + '</b>' + w.range + '</div>' +
+      '<div role="cell"><p class="ftxt">' + w.focus + '</p><span class="tag">' + w.tag + '</span></div>' +
+      '<div role="cell"><span class="lab">Регулярность</span><span class="stars" aria-label="' + w.days + ' из 5">' + stars(w.days) + '</span></div>' +
+      '<div role="cell"><span class="lab">Объём</span><span class="stars" aria-label="' + volStars(w.msgs) + ' из 5">' + stars(volStars(w.msgs)) + '</span></div>' +
+      '</div>';
+  });
+  rows.innerHTML = html;
+
+  // ---------- кнопка «Сменить фокус» ----------
+  var btn = document.getElementById('change-btn'), note = document.getElementById('change-note');
+  btn.addEventListener('click', function () {
+    var open = note.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  // ---------- tooltip ----------
+  var tip = document.getElementById('tip');
+  function showTip(el, text) {
+    tip.textContent = text;
+    tip.style.display = 'block';
+    var r = el.getBoundingClientRect(), tr = tip.getBoundingClientRect();
+    var x = r.left + r.width / 2 - tr.width / 2;
+    x = Math.max(8, Math.min(x, window.innerWidth - tr.width - 8));
+    var y = r.top - tr.height - 8;
+    if (y < 8) y = r.bottom + 8;
+    tip.style.left = x + 'px';
+    tip.style.top = y + 'px';
+  }
+  function hideTip() { tip.style.display = 'none'; }
+  function bindTip(el, text) {
+    el.addEventListener('pointerenter', function () { showTip(el, text); });
+    el.addEventListener('pointerleave', hideTip);
+    el.addEventListener('focus', function () { showTip(el, text); });
+    el.addEventListener('blur', hideTip);
+  }
+
+  // ---------- SVG helpers ----------
+  var NS = 'http://www.w3.org/2000/svg';
+  function s(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function t(parent, x, y, txt, cls, anchor) {
+    var e = s('text', { x: x, y: y, 'class': cls, 'text-anchor': anchor || 'start' }, parent);
+    e.textContent = txt;
+    return e;
+  }
+
+  // ---------- столбчатая диаграмма ----------
+  function bars(host, opt) {
+    host.innerHTML = '';
+    var W = host.clientWidth || 320, H = 190;
+    var m = { l: 26, r: 6, t: 20, b: 28 };
+    var pw = W - m.l - m.r, ph = H - m.t - m.b;
+    var svg = s('svg', { width: W, height: H, viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': opt.aria }, host);
+    var y = function (v) { return m.t + ph - (v / opt.max) * ph; };
+
+    opt.ticks.forEach(function (tv) {
+      s('line', { x1: m.l, x2: W - m.r, y1: y(tv), y2: y(tv), stroke: tv === 0 ? 'var(--axis)' : 'var(--grid)', 'stroke-width': 1 }, svg);
+      t(svg, m.l - 6, y(tv) + 4, tv, 'axis-text', 'end');
+    });
+
+    var band = pw / weeks.length;
+    var bw = Math.min(24, band * 0.6);
+    var maxV = Math.max.apply(null, weeks.map(function (w) { return w[opt.key]; }));
+    weeks.forEach(function (w, i) {
+      var v = w[opt.key];
+      var x = m.l + band * i + (band - bw) / 2;
+      var h = (v / opt.max) * ph, top = y(v), r = Math.min(4, h);
+      s('path', {
+        d: 'M' + x + ',' + (top + h) + ' L' + x + ',' + (top + r) + ' Q' + x + ',' + top + ' ' + (x + r) + ',' + top +
+           ' L' + (x + bw - r) + ',' + top + ' Q' + (x + bw) + ',' + top + ' ' + (x + bw) + ',' + (top + r) + ' L' + (x + bw) + ',' + (top + h) + ' Z',
+        fill: opt.color
+      }, svg);
+      t(svg, x + bw / 2, H - 10, w.n, 'axis-text', 'middle');
+      if (v === maxV || i === weeks.length - 1) t(svg, x + bw / 2, top - 6, v, 'val-text', 'middle');
+      var hit = s('rect', { x: m.l + band * i, y: m.t, width: band, height: ph + m.b - 10, fill: 'transparent', tabindex: 0, 'class': 'hit',
+        'aria-label': 'Неделя ' + w.n + ', ' + w.range + ': ' + opt.tipFn(w) }, svg);
+      bindTip(hit, 'Неделя ' + w.n + ' · ' + w.range + '\n' + opt.tipFn(w));
+    });
+    t(svg, m.l + pw / 2, H - 0, '', 'axis-text', 'middle');
+    var cap = t(svg, W - m.r, H - 10, 'неделя', 'axis-text', 'end');
+    cap.setAttribute('opacity', 0); // подпись оси уже в заголовке; оставлена для скринридеров
+  }
+
+  // ---------- линия оценки запроса ----------
+  function ratingLine(host) {
+    host.innerHTML = '';
+    var W = host.clientWidth || 640, H = 230;
+    var m = { l: 28, r: 24, t: 24, b: 32 };
+    var pw = W - m.l - m.r, ph = H - m.t - m.b;
+    var svg = s('svg', { width: W, height: H, viewBox: '0 0 ' + W + ' ' + H, role: 'img',
+      'aria-label': 'Оценка запроса: 3 на старте, 5 после первого месяца, 6 после второго' }, host);
+    var d0 = ratings[0].date.getTime(), d1 = today.getTime();
+    var x = function (d) { return m.l + 12 + ((d.getTime() - d0) / (d1 - d0)) * (pw - 24); };
+    var y = function (v) { return m.t + ph - (v / 10) * ph; };
+
+    [0, 5, 10].forEach(function (tv) {
+      s('line', { x1: m.l, x2: W - m.r, y1: y(tv), y2: y(tv), stroke: tv === 0 ? 'var(--axis)' : 'var(--grid)', 'stroke-width': 1 }, svg);
+      t(svg, m.l - 6, y(tv) + 4, tv, 'axis-text', 'end');
+    });
+
+    var pts = ratings.map(function (r) { return [x(r.date), y(r.v)]; });
+    var line = pts.map(function (p, i) { return (i ? 'L' : 'M') + p[0] + ',' + p[1]; }).join(' ');
+    s('path', { d: line + ' L' + pts[pts.length - 1][0] + ',' + y(0) + ' L' + pts[0][0] + ',' + y(0) + ' Z', fill: 'var(--series-1)', 'fill-opacity': 0.1 }, svg);
+    s('path', { d: line, fill: 'none', stroke: 'var(--series-1)', 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, svg);
+
+    ratings.forEach(function (r, i) {
+      var cx = pts[i][0], cy = pts[i][1];
+      s('circle', { cx: cx, cy: cy, r: 6, fill: 'var(--surface-1)' }, svg);          // кольцо 2px цвета поверхности
+      s('circle', { cx: cx, cy: cy, r: 4, fill: 'var(--series-1)' }, svg);
+      t(svg, cx, cy - 12, r.v, 'val-text', 'middle');
+      var anchor = i === 0 ? 'start' : 'middle';
+      t(svg, i === 0 ? cx - 4 : cx, H - 10, r.label, 'axis-text', anchor);
+      var hit = s('circle', { cx: cx, cy: cy, r: 18, fill: 'transparent', tabindex: 0, 'class': 'hit',
+        'aria-label': r.label + ': оценка ' + r.v + ' из 10, ' + r.what }, svg);
+      bindTip(hit, r.label + ' · ' + r.what + '\nОценка запроса: ' + r.v + ' из 10');
+    });
+  }
+
+  function renderAll() {
+    ratingLine(document.getElementById('chart-rating'));
+    bars(document.getElementById('chart-reg'), {
+      key: 'days', max: 5, ticks: [0, 1, 2, 3, 4, 5], color: 'var(--series-1)',
+      aria: 'Регулярность по неделям: дней с наблюдениями из пяти',
+      tipFn: function (w) { return w.days + ' из 5 дней с наблюдениями'; }
+    });
+    bars(document.getElementById('chart-vol'), {
+      key: 'msgs', max: 30, ticks: [0, 10, 20, 30], color: 'var(--series-2)',
+      aria: 'Объём по неделям: число сообщений с наблюдениями',
+      tipFn: function (w) { return w.msgs + ' сообщений с наблюдениями'; }
+    });
+  }
+  renderAll();
+  var timer;
+  window.addEventListener('resize', function () { clearTimeout(timer); timer = setTimeout(renderAll, 120); });
+})();
+</script>
+</body>
+</html>
