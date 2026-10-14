@@ -42,10 +42,13 @@ units:
     access: [Тимур]
     description: >
       PaaS-хостинг, автодеплой по push в repo-botik@master (настройка
-      автодеплоя — в панели Railway, не в коде репозитория).
+      автодеплоя — в панели Railway, не в коде репозитория). Переменные
+      окружения: TELEGRAM_BOT_TOKEN, ANTHROPIC_API_KEY, DATABASE_PUBLIC_URL,
+      ADMIN_IDS (с 2026-10-14: id администраторов через запятую, открывает
+      служебные команды /debug, /simulate*, /resetonboarding).
     status: active
     owner: Тимур
-    updated: 2026-09-15
+    updated: 2026-10-14
 
   - id: db-botik-pg
     type: service
@@ -74,9 +77,11 @@ units:
       (вечерняя рефлексия 16:00 UTC, недельные/месячные/годовые итоги).
       Токен — TELEGRAM_BOT_TOKEN (Railway env). Переименование бота
       запланировано, но не выполнено (backlog 1.5, устаревшая концепция).
+      Служебные команды (/debug, /simulate*, /resetonboarding) доступны только
+      id из ADMIN_IDS (с 2026-10-14).
     status: active
     owner: Тимур
-    updated: 2026-09-02
+    updated: 2026-10-14
 
   - id: api-anthropic
     type: service
