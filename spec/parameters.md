@@ -50,4 +50,18 @@ title: Параметры (числа, времена, наборы значен
 | P-PAUSE-ACK-VARIANTS | 6 вариантов признания паузы | длина `PAUSE_ACK_MESSAGES` в `texts.py` | [B5-05](blocks/5-silence.md) |
 | P-WEEKLY-ON-PAUSE-VARIANTS | 2 варианта заготовки недельного резюме на паузе | длина `WEEKLY_ON_PAUSE_MESSAGES` в `texts.py` | [B5-16](blocks/5-silence.md) |
 
+## Недельный цикл и сессия (блок 6)
+
+| ID | Значение | Константа в коде | Используется в |
+|---|---|---|---|
+| P-WEEKLY-TIME | суббота 9:00 (GMT+3); в воскресенье 9:00 кнопка «Изучил» считается нажатой | `WEEKLY_HOUR` в `database_v2.py` | [B6-01](blocks/6-weekly.md), [B6-19](blocks/6-weekly.md), [B6A-06](blocks/6a-session.md) |
+| P-WEEKLY-WINDOW-MIN | окно отправки субботы 60 минут (9:00–9:59) | `WEEKLY_WINDOW_MINUTES` в `database_v2.py` | [B6-01](blocks/6-weekly.md) |
+| P-WEEKLY-CHOICE-WAIT-MIN | 60 минут на «Что влияло?» и выбор фокуса | `WEEKLY_CHOICE_WAIT_MINUTES` в `database_v2.py` | [B6-20](blocks/6-weekly.md) |
+| P-WEEKLY-OWN-MAX-HOURS | 24 часа: предел остановки таймера при «Своём фокусе» (допущение) | `WEEKLY_OWN_MAX_HOURS` в `database_v2.py` | [B6-21](blocks/6-weekly.md) |
+| P-NEWCOMER-MIN-WEEKDAYS | первая суббота новичка: минимум 3 будних дня с фиксации фокуса | `NEWCOMER_MIN_WEEKDAYS` в `database_v2.py` | [B6-02](blocks/6-weekly.md) |
+| P-WEEKLY-FEW-OBSERVATIONS | «наблюдений мало»: меньше 3 за неделю (допущение) | `FEW_OBSERVATIONS` в `services/stars.py` | [B6-07](blocks/6-weekly.md) |
+| P-STARS-VOLUME-THRESHOLDS | пороги звёздочек объёма: 1 / 4 / 8 / 13 / 20 наблюдений (1–5 звёзд; предложение разработки, пороги задают Тимур и Настя) | `VOLUME_THRESHOLDS` в `services/stars.py` | [B6-05](blocks/6-weekly.md), [B6-10](blocks/6-weekly.md) |
+| P-STARS-MAX | максимум 5 звёзд (регулярность — 0–5 по будним дням) | `MAX_STARS` в `services/stars.py` | [B6-10](blocks/6-weekly.md) |
+| P-SESSION-MINUTES | сессия — 60 минут | `SESSION_MINUTES` в `database_v2.py` | [B6A-03](blocks/6a-session.md), [B6A-07](blocks/6a-session.md) |
+
 [← К оглавлению](README.md)

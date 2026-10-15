@@ -156,24 +156,24 @@ started: 2026-10-15
 | 403 | &nbsp;&nbsp;&nbsp;&nbsp;Переходы | 26 | blocks/5-silence.md | перенесено |
 | 429 | &nbsp;&nbsp;&nbsp;&nbsp;Техническое (для разработки, BOT-25) | 5 | blocks/5-silence.md | перенесено |
 | 434 | &nbsp;&nbsp;&nbsp;&nbsp;Как сделано в коде (итерация 7, 2026-10-14; допущения разработки, подтвердить с Тимуром и Настей) | 13 | decisions/ (допущения) + удалить остальное | допущения в decisions/, остальное удалено (код — источник) |
-| 447 | &nbsp;&nbsp;Блок 6 — Недельный цикл | 2 | blocks/6-weekly.md |  |
-| 449 | &nbsp;&nbsp;&nbsp;&nbsp;Когда приходит | 9 | blocks/6-weekly.md |  |
-| 458 | &nbsp;&nbsp;&nbsp;&nbsp;Окно недельного резюме (решение Тимура 2026-10-14) | 6 | blocks/6-weekly.md |  |
-| 464 | &nbsp;&nbsp;&nbsp;&nbsp;Если наблюдений мало | 3 | blocks/6-weekly.md |  |
-| 467 | &nbsp;&nbsp;&nbsp;&nbsp;Структура недельного резюме | 15 | blocks/6-weekly.md |  |
-| 482 | &nbsp;&nbsp;&nbsp;&nbsp;Сообщение после недельного резюме (выходные) | 13 | blocks/6-weekly.md |  |
-| 495 | &nbsp;&nbsp;&nbsp;&nbsp;Как сделано в коде (итерация 8, 2026-10-14; допущения разработки, подтвердить с Тимуром и Настей) | 14 | decisions/ (допущения) + удалить остальное |  |
-| 509 | &nbsp;&nbsp;&nbsp;&nbsp;Еженедельная сессия с психологом | 8 | blocks/6a-session.md |  |
-| 517 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0. Подтверждение прочтения резюме | 15 | blocks/6-weekly.md |  |
-| 532 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0а. Приглашение на сессию: «Сейчас» / «Позже» | 16 | blocks/6-weekly.md |  |
-| 548 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Приглашение | 14 | blocks/6-weekly.md |  |
-| 562 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Время и часовые пояса | 3 | blocks/6-weekly.md |  |
-| 565 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Напоминания (отдельная серия сообщений) | 8 | blocks/6-weekly.md |  |
-| 573 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. Ход сессии | 8 | blocks/6-weekly.md |  |
-| 581 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. Завершение и резюме сессии | 6 | blocks/6-weekly.md |  |
-| 587 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. Неиспользованная сессия и кризис | 7 | blocks/6a-session.md |  |
-| 594 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Как сделано в коде (итерация 9, 2026-10-14; допущения разработки, подтвердить с Тимуром и Настей) | 12 | decisions/ (допущения) + удалить остальное |  |
-| 606 | &nbsp;&nbsp;&nbsp;&nbsp;Дашборд — каждую неделю | 9 | blocks/6-weekly.md / 7-monthly.md (раздел «Дашборд») |  |
+| 447 | &nbsp;&nbsp;Блок 6 — Недельный цикл | 2 | blocks/6-weekly.md |перенесено |
+| 449 | &nbsp;&nbsp;&nbsp;&nbsp;Когда приходит | 9 | blocks/6-weekly.md |перенесено |
+| 458 | &nbsp;&nbsp;&nbsp;&nbsp;Окно недельного резюме (решение Тимура 2026-10-14) | 6 | blocks/6-weekly.md |перенесено |
+| 464 | &nbsp;&nbsp;&nbsp;&nbsp;Если наблюдений мало | 3 | blocks/6-weekly.md |перенесено |
+| 467 | &nbsp;&nbsp;&nbsp;&nbsp;Структура недельного резюме | 15 | blocks/6-weekly.md |перенесено |
+| 482 | &nbsp;&nbsp;&nbsp;&nbsp;Сообщение после недельного резюме (выходные) | 13 | blocks/6-weekly.md |перенесено |
+| 495 | &nbsp;&nbsp;&nbsp;&nbsp;Как сделано в коде (итерация 8, 2026-10-14; допущения разработки, подтвердить с Тимуром и Настей) | 14 | decisions/ (допущения) + удалить остальное | перенесено (допущения → decisions/2026-10-14-weekly-*; остальное удалено, код — источник) |
+| 509 | &nbsp;&nbsp;&nbsp;&nbsp;Еженедельная сессия с психологом | 8 | blocks/6a-session.md | перенесено (blocks/6a-session.md) |
+| 517 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0. Подтверждение прочтения резюме | 15 | blocks/6-weekly.md | перенесено (B6-16…B6-19) |
+| 532 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0а. Приглашение на сессию: «Сейчас» / «Позже» | 16 | blocks/6-weekly.md | перенесено (blocks/6a-session.md, B6A-02…B6A-05) |
+| 548 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Приглашение | 14 | blocks/6-weekly.md | перенесено (blocks/6a-session.md, B6A-01, B6A-07) |
+| 562 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Время и часовые пояса | 3 | blocks/6-weekly.md |перенесено как вопрос (B6A-13; открытый вопрос) |
+| 565 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Напоминания (отдельная серия сообщений) | 8 | blocks/6-weekly.md |удалено (напоминания не используются после п. 0а: схема заменена) |
+| 573 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. Ход сессии | 8 | blocks/6-weekly.md | перенесено (blocks/6a-session.md, B6A-07, B6A-09, B6A-10) |
+| 581 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. Завершение и резюме сессии | 6 | blocks/6-weekly.md | перенесено (blocks/6a-session.md, B6A-08) |
+| 587 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. Неиспользованная сессия и кризис | 7 | blocks/6a-session.md | перенесено (blocks/6a-session.md, B6A-11…B6A-13) |
+| 594 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Как сделано в коде (итерация 9, 2026-10-14; допущения разработки, подтвердить с Тимуром и Настей) | 12 | decisions/ (допущения) + удалить остальное | перенесено (допущения → decisions/2026-10-14-session-*; остальное удалено, код — источник) |
+| 606 | &nbsp;&nbsp;&nbsp;&nbsp;Дашборд — каждую неделю | 9 | blocks/6-weekly.md / 7-monthly.md (раздел «Дашборд») | перенесено (раздел «Дашборд» в blocks/6-weekly.md) |
 | 615 | &nbsp;&nbsp;Блок 7 — Месячный срез | 28 | blocks/7-monthly.md |  |
 | 643 | &nbsp;&nbsp;&nbsp;&nbsp;Как сделано в коде (итерация 10, 2026-10-14; допущения разработки, подтвердить с Тимуром и Настей) | 12 | decisions/ (допущения) + удалить остальное |  |
 | 655 | &nbsp;&nbsp;&nbsp;&nbsp;Дашборд | 5 | blocks/6-weekly.md / 7-monthly.md (раздел «Дашборд») |  |
