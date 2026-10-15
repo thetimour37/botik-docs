@@ -124,25 +124,25 @@ started: 2026-10-15
 | 114 | &nbsp;&nbsp;&nbsp;&nbsp;Вопрос контракта | 7 | blocks/1-contract.md | перенесено |
 | 121 | &nbsp;&nbsp;&nbsp;&nbsp;Дефолты | 7 | blocks/1-contract.md | перенесено |
 | 128 | &nbsp;&nbsp;&nbsp;&nbsp;Просмотр текущих настроек | 7 | blocks/1-contract.md |  |
-| 135 | &nbsp;&nbsp;Блок 2 — Определение фокуса | 4 | blocks/2-focus.md |  |
-| 139 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 0 — Запрос и оценка запроса | 14 | blocks/2-focus.md |  |
-| 153 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 1 — Предложение определить фокус | 3 | blocks/2-focus.md |  |
-| 156 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 2 — Базовая схема: готовые вопросы | 12 | blocks/2-focus.md |  |
-| 168 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 3 — Если базовая схема не срабатывает: диалог в режиме психолога | 7 | blocks/2-focus.md |  |
-| 175 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 4 — Предложение вариантов и подтверждение одного | 5 | blocks/2-focus.md |  |
-| 180 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 5 — Если фокус не определён и не подтверждён | 11 | blocks/2-focus.md |  |
-| 191 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 6 — Оценка 1–10 | 13 | blocks/2-focus.md |  |
-| 204 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 7 — Фиксация и переход | 5 | blocks/2-focus.md |  |
-| 209 | &nbsp;&nbsp;&nbsp;&nbsp;Как сделано в коде (итерация 4, 2026-10-14; допущения разработки, подтвердить с Тимуром и Настей) | 12 | decisions/ (допущения) + удалить остальное |  |
-| 221 | &nbsp;&nbsp;Блок 3 — Ежедневный сбор наблюдений | 4 | blocks/3-daily.md |  |
-| 225 | &nbsp;&nbsp;&nbsp;&nbsp;Утреннее сообщение (пн–пт, 9:00) | 9 | blocks/3-daily.md |  |
-| 234 | &nbsp;&nbsp;&nbsp;&nbsp;Режим дня | 3 | blocks/3-daily.md |  |
-| 237 | &nbsp;&nbsp;&nbsp;&nbsp;Реакция бота на сообщения | 12 | blocks/3-daily.md |  |
-| 249 | &nbsp;&nbsp;&nbsp;&nbsp;Выходные (сб, вс) | 5 | blocks/3-daily.md |  |
-| 254 | &nbsp;&nbsp;&nbsp;&nbsp;Если в сообщении — призыв о помощи, срочное или кризисный сигнал | 8 | blocks/3-daily.md |  |
-| 262 | &nbsp;&nbsp;&nbsp;&nbsp;Если пользователь уходит на другую тему | 6 | blocks/3-daily.md |  |
-| 268 | &nbsp;&nbsp;&nbsp;&nbsp;Смена фокуса — один путь (решение Тимура 2026-10-14) | 9 | blocks/3-daily.md |  |
-| 277 | &nbsp;&nbsp;&nbsp;&nbsp;Как сделано в коде (итерация 5, 2026-10-14; допущения разработки, подтвердить с Тимуром и Настей) | 34 | decisions/ (допущения) + удалить остальное |  |
+| 135 | &nbsp;&nbsp;Блок 2 — Определение фокуса | 4 | blocks/2-focus.md | перенесено |
+| 139 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 0 — Запрос и оценка запроса | 14 | blocks/2-focus.md | перенесено |
+| 153 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 1 — Предложение определить фокус | 3 | blocks/2-focus.md | перенесено |
+| 156 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 2 — Базовая схема: готовые вопросы | 12 | blocks/2-focus.md | перенесено |
+| 168 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 3 — Если базовая схема не срабатывает: диалог в режиме психолога | 7 | blocks/2-focus.md | перенесено |
+| 175 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 4 — Предложение вариантов и подтверждение одного | 5 | blocks/2-focus.md | перенесено |
+| 180 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 5 — Если фокус не определён и не подтверждён | 11 | blocks/2-focus.md | перенесено |
+| 191 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 6 — Оценка 1–10 | 13 | blocks/2-focus.md | перенесено |
+| 204 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 7 — Фиксация и переход | 5 | blocks/2-focus.md | перенесено |
+| 209 | &nbsp;&nbsp;&nbsp;&nbsp;Как сделано в коде (итерация 4, 2026-10-14; допущения разработки, подтвердить с Тимуром и Настей) | 12 | decisions/ (допущения) + удалить остальное | допущения в decisions/, остальное удалено (код — источник) |
+| 221 | &nbsp;&nbsp;Блок 3 — Ежедневный сбор наблюдений | 4 | blocks/3-daily.md | перенесено |
+| 225 | &nbsp;&nbsp;&nbsp;&nbsp;Утреннее сообщение (пн–пт, 9:00) | 9 | blocks/3-daily.md | перенесено |
+| 234 | &nbsp;&nbsp;&nbsp;&nbsp;Режим дня | 3 | blocks/3-daily.md | перенесено |
+| 237 | &nbsp;&nbsp;&nbsp;&nbsp;Реакция бота на сообщения | 12 | blocks/3-daily.md | перенесено |
+| 249 | &nbsp;&nbsp;&nbsp;&nbsp;Выходные (сб, вс) | 5 | blocks/3-daily.md | перенесено |
+| 254 | &nbsp;&nbsp;&nbsp;&nbsp;Если в сообщении — призыв о помощи, срочное или кризисный сигнал | 8 | blocks/3-daily.md | перенесено |
+| 262 | &nbsp;&nbsp;&nbsp;&nbsp;Если пользователь уходит на другую тему | 6 | blocks/3-daily.md | перенесено |
+| 268 | &nbsp;&nbsp;&nbsp;&nbsp;Смена фокуса — один путь (решение Тимура 2026-10-14) | 9 | blocks/3-daily.md | перенесено |
+| 277 | &nbsp;&nbsp;&nbsp;&nbsp;Как сделано в коде (итерация 5, 2026-10-14; допущения разработки, подтвердить с Тимуром и Настей) | 34 | decisions/ (допущения) + удалить остальное | допущения в decisions/, остальное удалено (код — источник) |
 | 311 | &nbsp;&nbsp;Блок 4 — Вечер: работа с днём и резюме | 4 | blocks/4-evening.md |  |
 | 315 | &nbsp;&nbsp;&nbsp;&nbsp;Когда | 5 | blocks/4-evening.md |  |
 | 320 | &nbsp;&nbsp;&nbsp;&nbsp;Тайминг вечера (решение Тимура 2026-10-14) | 6 | blocks/4-evening.md |  |

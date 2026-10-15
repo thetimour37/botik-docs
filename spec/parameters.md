@@ -17,4 +17,19 @@ title: Параметры (числа, времена, наборы значен
 | P-CONTRACT-TIME-OPTIONS | 19:00, 20:00, 21:00, 22:00 (кнопки; пятая — «Выбрать другое») | `CONTRACT_TIME_OPTIONS` в `keyboards.py` | [B1-02](blocks/1-contract.md) |
 | P-MORNING-TIME | 9:00 пн–пт (GMT+3); окно отправки 30 минут (9:00–9:29) | `MORNING_HOUR`, `MORNING_WINDOW_MINUTES` в `database_v2.py` | [B1-05](blocks/1-contract.md) |
 
+## Ежедневный сбор и фокус (блоки 2–3)
+
+| ID | Значение | Константа в коде | Используется в |
+|---|---|---|---|
+| P-SCORE-RANGE | оценка запроса 1–10 | регулярное выражение `_SCORE_RE` в `handlers/focus.py`, `request_score_keyboard` в `keyboards.py` | [B2-05](blocks/2-focus.md), [B2-16](blocks/2-focus.md) |
+| P-FOCUS-CLARIFY-MAX | 2 готовых уточняющих вопроса | длина `FOCUS_CLARIFY_QUESTIONS` в `texts.py` | [B2-08](blocks/2-focus.md) |
+| P-FOCUS-MSG-LIMIT | 20 сообщений пользователя на этап фокуса | `FOCUS_MSG_LIMIT` в `handlers/focus.py` | [B2-10](blocks/2-focus.md) |
+| P-STAGE-MIN-HOURS | срок этапа: до конца дня (GMT+3), но не меньше 3 часов от начала | число 3 в `block2_deadline` в `database_v2.py` (именованной константы нет) | [B2-06](blocks/2-focus.md), [B2-10](blocks/2-focus.md), [B2-13](blocks/2-focus.md), [B2-17](blocks/2-focus.md) |
+| P-FOCUS-OPTIONS-COUNT | 3 варианта фокуса | в промптах `FOCUS_DIALOG_PROMPT`, `FOCUS_CHANGE_OPTIONS_PROMPT` (константы нет) | [B2-11](blocks/2-focus.md), [B3-20](blocks/3-daily.md) |
+| P-MORNING-VARIANTS | 5 вариантов утреннего сообщения | длина `MORNING_MESSAGES` в `texts.py` | [B3-02](blocks/3-daily.md), [B3-03](blocks/3-daily.md) |
+| P-DAILY-TEXT-REPLIES | первые 3 сообщения дня — реакция текстом | `DAILY_TEXT_REPLIES` в `database_v2.py` | [B3-08](blocks/3-daily.md) |
+| P-REACTION-EMOJI | 👍 (✅ и 🤍 Telegram не допускает) | `REACTION_EMOJI` в `handlers/observation.py` | [B3-09](blocks/3-daily.md) |
+| P-OFFTOPIC-OFFERS-PER-DAY | 1 предложение запомнить тему в день | в логике `handlers/observation.py` (константы нет) | [B3-16](blocks/3-daily.md) |
+| P-FOCUS-CHANGE-OWN-MAX-HOURS | 24 часа на фразу и подтверждение при «Свой фокус» | `FOCUS_CHANGE_OWN_MAX_HOURS` в `database_v2.py` | [B3-20](blocks/3-daily.md) |
+
 [← К оглавлению](README.md)
