@@ -115,14 +115,14 @@ started: 2026-10-15
 |---|---|---|---|---|
 | 1 | Ботик — Спецификация взаимодействия v1.0 | 10 | README.md (шапка) |  |
 | 11 | &nbsp;&nbsp;Общие правила | 25 | README.md + glossary.md |  |
-| 36 | &nbsp;&nbsp;Блок 0 — Онбординг (один раз, при первом `/start`) | 4 | blocks/0-onboarding.md |  |
-| 40 | &nbsp;&nbsp;&nbsp;&nbsp;Экран 0.1 — Приветствие | 14 | blocks/0-onboarding.md |  |
-| 54 | &nbsp;&nbsp;&nbsp;&nbsp;Экран 0.2 — Инструкция «как это работает» | 41 | blocks/0-onboarding.md |  |
-| 95 | &nbsp;&nbsp;&nbsp;&nbsp;Логика перехода | 12 | blocks/0-onboarding.md |  |
-| 107 | &nbsp;&nbsp;Блок 1 — Контракт (один раз, на старте) | 4 | blocks/1-contract.md |  |
-| 111 | &nbsp;&nbsp;&nbsp;&nbsp;Формат | 3 | blocks/1-contract.md |  |
-| 114 | &nbsp;&nbsp;&nbsp;&nbsp;Вопрос контракта | 7 | blocks/1-contract.md |  |
-| 121 | &nbsp;&nbsp;&nbsp;&nbsp;Дефолты | 7 | blocks/1-contract.md |  |
+| 36 | &nbsp;&nbsp;Блок 0 — Онбординг (один раз, при первом `/start`) | 4 | blocks/0-onboarding.md | перенесено |
+| 40 | &nbsp;&nbsp;&nbsp;&nbsp;Экран 0.1 — Приветствие | 14 | blocks/0-onboarding.md | перенесено |
+| 54 | &nbsp;&nbsp;&nbsp;&nbsp;Экран 0.2 — Инструкция «как это работает» | 41 | blocks/0-onboarding.md | перенесено |
+| 95 | &nbsp;&nbsp;&nbsp;&nbsp;Логика перехода | 12 | blocks/0-onboarding.md | перенесено |
+| 107 | &nbsp;&nbsp;Блок 1 — Контракт (один раз, на старте) | 4 | blocks/1-contract.md | перенесено |
+| 111 | &nbsp;&nbsp;&nbsp;&nbsp;Формат | 3 | blocks/1-contract.md | перенесено |
+| 114 | &nbsp;&nbsp;&nbsp;&nbsp;Вопрос контракта | 7 | blocks/1-contract.md | перенесено |
+| 121 | &nbsp;&nbsp;&nbsp;&nbsp;Дефолты | 7 | blocks/1-contract.md | перенесено |
 | 128 | &nbsp;&nbsp;&nbsp;&nbsp;Просмотр текущих настроек | 7 | blocks/1-contract.md |  |
 | 135 | &nbsp;&nbsp;Блок 2 — Определение фокуса | 4 | blocks/2-focus.md |  |
 | 139 | &nbsp;&nbsp;&nbsp;&nbsp;Шаг 0 — Запрос и оценка запроса | 14 | blocks/2-focus.md |  |
@@ -179,5 +179,5 @@ started: 2026-10-15
 | 655 | &nbsp;&nbsp;&nbsp;&nbsp;Дашборд | 5 | blocks/6-weekly.md / 7-monthly.md (раздел «Дашборд») |  |
 | 660 | &nbsp;&nbsp;Открытые задачи для Насти 🔴 | 18 | Linear (задачи Настя, BOT-45…56) — удалить из спеки |  |
 | 678 | &nbsp;&nbsp;&nbsp;&nbsp;Заглушки в коде (полный список, 2026-10-14, итерация 11) | 28 | Linear BOT-45 + маркер TBD-Настя в коде — удалить из спеки |  |
-| 706 | &nbsp;&nbsp;Команды бота | 22 | commands.md |  |
+| 706 | &nbsp;&nbsp;Команды бота | 22 | commands.md | перенесено |
 | 728 | &nbsp;&nbsp;Расхождения со спецификацией в текущем коде (на 2026-10-13; обновлено 2026-10-14) | 25 | удалить (статусы — в Linear) |  |
