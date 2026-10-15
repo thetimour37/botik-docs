@@ -64,4 +64,12 @@ title: Параметры (числа, времена, наборы значен
 | P-STARS-MAX | максимум 5 звёзд (регулярность — 0–5 по будним дням) | `MAX_STARS` в `services/stars.py` | [B6-10](blocks/6-weekly.md) |
 | P-SESSION-MINUTES | сессия — 60 минут | `SESSION_MINUTES` в `database_v2.py` | [B6A-03](blocks/6a-session.md), [B6A-07](blocks/6a-session.md) |
 
+## Месячный срез и дашборд (блок 7)
+
+| ID | Значение | Константа в коде | Используется в |
+|---|---|---|---|
+| P-MONTHLY-MIN-DAYS | срез приходит, если со старта прошло больше 10 дней (строго больше 240 часов) | `MONTHLY_MIN_DAYS` в `database_v2.py` | [B7-02](blocks/7-monthly.md) |
+| P-MONTHLY-STEP-WAIT-MIN | 60 минут на каждый шаг среза (оценка, выбор запроса, новый запрос, оценка нового) | `MONTHLY_STEP_WAIT_MINUTES` в `database_v2.py` | [B7-07](blocks/7-monthly.md), [B7-08](blocks/7-monthly.md), [B7-11](blocks/7-monthly.md), [B7-12](blocks/7-monthly.md) |
+| P-DASHBOARD-WEEKS | дашборд показывает 4 последние недели (включая текущую) | `DASHBOARD_WEEKS` в `handlers/commands.py` | [B7-15](blocks/7-monthly.md) |
+
 [← К оглавлению](README.md)
