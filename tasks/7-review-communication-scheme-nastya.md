@@ -8,7 +8,7 @@ priority: P1
 assignee: Настя
 aligned: false
 tags: [botik, spec, review, communication]
-source: botik-docs/spec/схема_общения_v1.md
+source: botik-docs/spec/схема_общения_v2.md
 project: botik
 related: [9-review-communication-scheme-timur]
 ---
@@ -17,7 +17,7 @@ related: [9-review-communication-scheme-timur]
 
 ## What
 
-Пройти визуальный HTML-документ со схемой общения бота с пользователем (`botik-docs/spec/схема_общения_v1.md` — прислан в группу 2026-09-02) и дать замечания.
+Пройти визуальный HTML-документ со схемой общения бота с пользователем (`botik-docs/spec/схема_общения_v2.md` — прислан в группу 2026-09-02) и дать замечания.
 
 Особое внимание — блоки, отмеченные 🔴:
 - Структура вечернего резюме (см. также [[1-evening-summary-structure]])
@@ -36,4 +36,4 @@ related: [9-review-communication-scheme-timur]
 
 - Настя прошла все 7 блоков схемы
 - Замечания зафиксированы (в чате группы или в комментариях к документу)
-- Тимур учёл правки в `spec/спецификация_взаимодействия_v1.md`
+- Тимур учёл правки в `spec/спецификация_взаимодействия_v2.md`
