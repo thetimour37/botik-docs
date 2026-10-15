@@ -53,10 +53,12 @@ units:
       MAX_SILENCE_CHECKS (по умолчанию 3/3). Итерация 11: новых переменных нет;
       массовый перевод пользователей на новую логику — из бота командой
       /resetv2 all или `railway run python scripts/reset_to_v2.py --all-legacy`
-      (dry-run, затем --apply).
+      (dry-run, затем --apply). v2.1.0 (2026-10-15): новых переменных нет;
+      версия бота — `version.py`, описание релиза для отчёта о запуске —
+      `release_notes/vX.Y.Z.md` в репозитории бота; в БД новая таблица bot_meta.
     status: active
     owner: Тимур
-    updated: 2026-10-14
+    updated: 2026-10-15
 
   - id: db-botik-pg
     type: service
