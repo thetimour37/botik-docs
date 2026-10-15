@@ -132,6 +132,16 @@ def check_forbidden(botik):
                 errors.append(f"[термины] «{t}» найдено в {f.name}")
 
 
+def check_map():
+    f = DOCS / "tasks" / "60-spec-restructure.md"
+    if not f.exists():
+        return
+    for l in read(f).splitlines():
+        m = re.match(r"^\|\s*\d+\s*\|(.*)\|\s*$", l)
+        if m and not m.group(1).split("|")[-1].strip():
+            errors.append(f"[карта] пустой статус: {l[:70]}")
+
+
 def main():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
@@ -148,6 +158,7 @@ def main():
     params = check_params_and_affects(ids)
     ver = check_release(botik)
     check_forbidden(botik)
+    check_map()
     print(f"check-spec: правил {len(ids)}, ссылок {links}, ссылок на правила в коде/тестах {refs}, "
           f"параметров {params}, версия {ver}; ошибок {len(errors)}")
     for e in errors:

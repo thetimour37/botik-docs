@@ -7,11 +7,14 @@
 | Файл | Перенесён | Причина | Чем заменён |
 |---|---|---|---|
 | `roadmap.md` | 2026-10-13 | старая (апрельская 2026) концепция | `spec/` (новая концепция, август 2026) |
-| `how-it-works-now.md` | 2026-10-13 | старая концепция | `spec/спецификация_взаимодействия_v2.md` |
+| `how-it-works-now.md` | 2026-10-13 | старая концепция | `spec/README.md`, `spec/blocks/` |
 | `how-it-should-work-backlog.md` | 2026-10-13 | старая концепция; единственный актуальный пункт (1.5) перенесён в `backlog.md` | `backlog.md`, Linear |
-| `spec/схема_дня_v2.md` | 2026-10-13 | влита в спецификацию (Блоки 3–5) | `spec/спецификация_взаимодействия_v2.md` |
+| `spec/схема_дня_v2.md` | 2026-10-13 | влита в спецификацию (Блоки 3–5) | `spec/blocks/3-daily.md`, `4-evening.md`, `5-silence.md` |
+| `spec/спецификация_взаимодействия_v2.md` | 2026-10-15 | монолит разбит на блоки; общие правила и неделя пользователя перенесены в `spec/README.md`, открытые задачи и заглушки — в Linear (BOT-45, BOT-47…56, BOT-70…74) | `spec/README.md`, `spec/blocks/`, `spec/commands.md`, `spec/parameters.md` (BOT-60) |
+| `spec/схема_общения_v2.md` | 2026-10-15 | обзорная схема; таблица недели — в `spec/README.md`, остальное отражено в блоках | `spec/README.md`, `spec/blocks/` |
+| `spec/схема_старта_v2.md` | 2026-10-15 | обзорная схема старта; путь пользователя описан в блоках 0–2 | `spec/blocks/0-onboarding.md`, `1-contract.md`, `2-focus.md` |
 | `product/lean_canvas_botik_20260810.html` | 2026-10-13 | устаревшая версия canvas | `product/lean_canvas_botik_v2.md` |
-| `product/схема общения.html` | 2026-10-13 | заглушка со ссылкой на диаграмму старой машины состояний (normal / reflection / rare_reminders / pause) | `spec/схема_общения_v2.md` |
+| `product/схема общения.html` | 2026-10-13 | заглушка со ссылкой на диаграмму старой машины состояний (normal / reflection / rare_reminders / pause) | `spec/README.md`, `spec/blocks/` |
 | `product/Ботик 2.0 в Картинках версия Клод.png`, `product/Ботик 2.0 в Картинках.png`, `product/Ботик 2.0 в картинках. Value Proposal Canvas.png` | 2026-10-13 | иллюстрации старой версии продукта (Ботик 2.0), удалены из рабочей папки, сохранены в архиве | `product/lean_canvas_botik_v2.md` |
 
 ## Как добавить файл в архив

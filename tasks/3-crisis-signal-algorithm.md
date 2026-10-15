@@ -8,7 +8,7 @@ priority: P0
 assignee: Настя
 aligned: true
 tags: [botik, spec, safety, crisis]
-source: botik-docs/spec/спецификация_взаимодействия_v2.md
+source: botik-docs/spec/README.md и spec/blocks/
 project: botik
 ---
 
@@ -24,7 +24,7 @@ project: botik
 
 ## Why
 
-Из `spec/спецификация_взаимодействия_v2.md`, блок «Предохранитель при тяжёлом сигнале 🔴». Это блок безопасности — без чёткого алгоритма нельзя выпускать бота даже к тестовой группе.
+Из `spec/README.md и spec/blocks/`, блок «Предохранитель при тяжёлом сигнале 🔴». Это блок безопасности — без чёткого алгоритма нельзя выпускать бота даже к тестовой группе.
 
 ## Done when
 

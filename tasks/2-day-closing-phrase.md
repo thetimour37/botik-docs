@@ -8,7 +8,7 @@ priority: P0
 assignee: Настя
 aligned: true
 tags: [botik, spec, methodology, day-closing]
-source: botik-docs/spec/спецификация_взаимодействия_v2.md
+source: botik-docs/spec/README.md и spec/blocks/
 project: botik
 ---
 
@@ -20,7 +20,7 @@ project: botik
 
 ## Why
 
-Из `spec/спецификация_взаимодействия_v2.md`, блок «Закрытие дня 🔴». Фраза формирует границу — сигнал «на сегодня всё, диалог закрыт», без ощущения обрыва. Без ответа Насти этап C не может быть реализован.
+Из `spec/README.md и spec/blocks/`, блок «Закрытие дня 🔴». Фраза формирует границу — сигнал «на сегодня всё, диалог закрыт», без ощущения обрыва. Без ответа Насти этап C не может быть реализован.
 
 ## Done when
 
