@@ -3,7 +3,7 @@ id: D-2026-10-14-progress-hidden-mode2
 title: Команда /progress скрыта в режиме 2
 date: 2026-10-14
 decided_by: Тимур
-affects: CMD-PROGRESS
+affects: commands.md (/progress)
 ---
 
 # Решение: команда /progress скрыта в режиме 2
