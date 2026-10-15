@@ -11,9 +11,9 @@ title: Параметры (числа, времена, наборы значен
 
 | ID | Значение | Константа в коде | Используется в |
 |---|---|---|---|
-| P-EVENING-TIME-DEFAULT | 20:00 (GMT+3) | `DEFAULT_EVENING_TIME` в `database_v2.py` | [B1-04](blocks/1-contract.md) |
-| P-EVENING-TIME-MIN | 18:00 | `CUSTOM_TIME_MIN` в `handlers/v2.py` | [B1-03](blocks/1-contract.md), [B1-08](blocks/1-contract.md) |
-| P-EVENING-TIME-MAX | 22:30 | `CUSTOM_TIME_MAX` в `handlers/v2.py` | [B1-03](blocks/1-contract.md), [B1-08](blocks/1-contract.md) |
+| P-EVENING-TIME-DEFAULT | 20:00 (GMT+3) | `DEFAULT_EVENING_TIME` в `database_v2.py` | [B1-04](blocks/1-contract.md), [B4-01](blocks/4-evening.md), [B5-13](blocks/5-silence.md) |
+| P-EVENING-TIME-MIN | 18:00 | `CUSTOM_TIME_MIN` в `handlers/v2.py` | [B1-03](blocks/1-contract.md), [B1-08](blocks/1-contract.md), [B4-08](blocks/4-evening.md) |
+| P-EVENING-TIME-MAX | 22:30 | `CUSTOM_TIME_MAX` в `handlers/v2.py` | [B1-03](blocks/1-contract.md), [B1-08](blocks/1-contract.md), [B4-08](blocks/4-evening.md) |
 | P-CONTRACT-TIME-OPTIONS | 19:00, 20:00, 21:00, 22:00 (кнопки; пятая — «Выбрать другое») | `CONTRACT_TIME_OPTIONS` в `keyboards.py` | [B1-02](blocks/1-contract.md) |
 | P-MORNING-TIME | 9:00 пн–пт (GMT+3); окно отправки 30 минут (9:00–9:29) | `MORNING_HOUR`, `MORNING_WINDOW_MINUTES` в `database_v2.py` | [B1-05](blocks/1-contract.md) |
 
@@ -31,5 +31,23 @@ title: Параметры (числа, времена, наборы значен
 | P-REACTION-EMOJI | 👍 (✅ и 🤍 Telegram не допускает) | `REACTION_EMOJI` в `handlers/observation.py` | [B3-09](blocks/3-daily.md) |
 | P-OFFTOPIC-OFFERS-PER-DAY | 1 предложение запомнить тему в день | в логике `handlers/observation.py` (константы нет) | [B3-16](blocks/3-daily.md) |
 | P-FOCUS-CHANGE-OWN-MAX-HOURS | 24 часа на фразу и подтверждение при «Свой фокус» | `FOCUS_CHANGE_OWN_MAX_HOURS` в `database_v2.py` | [B3-20](blocks/3-daily.md) |
+
+## Вечер и молчание (блоки 4–5)
+
+Время вечера по умолчанию и диапазон своего времени — в разделе «Онбординг и контракт» (P-EVENING-TIME-DEFAULT, P-EVENING-TIME-MIN, P-EVENING-TIME-MAX).
+
+| ID | Значение | Константа в коде | Используется в |
+|---|---|---|---|
+| P-EVENING-ANSWER-WAIT-MIN | 30 минут на ответ на любой вечерний вопрос | `EVENING_ANSWER_WAIT_MINUTES` в `database_v2.py` | [B4-05](blocks/4-evening.md), [B4-11](blocks/4-evening.md), [B4-13](blocks/4-evening.md) |
+| P-EVENING-MAX-QUESTIONS | не больше 2 уточняющих вопросов за вечер | `EVENING_MAX_QUESTIONS` в `database_v2.py` | [B4-06](blocks/4-evening.md), [B4-09](blocks/4-evening.md) |
+| P-EVENING-MAX-MIN | весь вечер не дольше 90 минут (1,5 часа) | `EVENING_MAX_MINUTES` в `database_v2.py` | [B4-07](blocks/4-evening.md) |
+| P-EVENING-START-WINDOW-MIN | окно начала вечера 30 минут после времени из контракта | `EVENING_START_WINDOW_MINUTES` в `database_v2.py` | [B4-04](blocks/4-evening.md) |
+| P-EVENING-INVITE-VARIANTS | 3 варианта вопроса-приглашения | длина `EVENING_INVITE_MESSAGES` в `texts.py` | [B4-12](blocks/4-evening.md) |
+| P-CLOSING-VARIANTS | 3 варианта закрывающего сообщения (у каждого пара: 1-й и 2-й день молчания) | длина `CLOSING_EMPTY_DAY` в `texts.py` | [B4-14](blocks/4-evening.md), [B4-15](blocks/4-evening.md) |
+| P-SILENCE-DAYS | 3 будних дня без сообщений до проверки (и между проверками) | `SILENCE_DAYS` (переменная окружения, по умолчанию 3) в `database_v2.py` | [B5-02](blocks/5-silence.md), [B5-08](blocks/5-silence.md) |
+| P-MAX-SILENCE-CHECKS | до 3 проверок без ответа, затем `dormant` | `MAX_SILENCE_CHECKS` (переменная окружения, по умолчанию 3) в `database_v2.py` | [B5-08](blocks/5-silence.md) |
+| P-SILENCE-CHECK-VARIANTS | 5 вариантов проверки №1 | длина `SILENCE_DAY3_MESSAGES` в `texts.py` | [B5-03](blocks/5-silence.md) |
+| P-PAUSE-ACK-VARIANTS | 6 вариантов признания паузы | длина `PAUSE_ACK_MESSAGES` в `texts.py` | [B5-05](blocks/5-silence.md) |
+| P-WEEKLY-ON-PAUSE-VARIANTS | 2 варианта заготовки недельного резюме на паузе | длина `WEEKLY_ON_PAUSE_MESSAGES` в `texts.py` | [B5-16](blocks/5-silence.md) |
 
 [← К оглавлению](README.md)

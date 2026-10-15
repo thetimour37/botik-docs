@@ -143,19 +143,19 @@ started: 2026-10-15
 | 262 | &nbsp;&nbsp;&nbsp;&nbsp;Если пользователь уходит на другую тему | 6 | blocks/3-daily.md | перенесено |
 | 268 | &nbsp;&nbsp;&nbsp;&nbsp;Смена фокуса — один путь (решение Тимура 2026-10-14) | 9 | blocks/3-daily.md | перенесено |
 | 277 | &nbsp;&nbsp;&nbsp;&nbsp;Как сделано в коде (итерация 5, 2026-10-14; допущения разработки, подтвердить с Тимуром и Настей) | 34 | decisions/ (допущения) + удалить остальное | допущения в decisions/, остальное удалено (код — источник) |
-| 311 | &nbsp;&nbsp;Блок 4 — Вечер: работа с днём и резюме | 4 | blocks/4-evening.md |  |
-| 315 | &nbsp;&nbsp;&nbsp;&nbsp;Когда | 5 | blocks/4-evening.md |  |
-| 320 | &nbsp;&nbsp;&nbsp;&nbsp;Тайминг вечера (решение Тимура 2026-10-14) | 6 | blocks/4-evening.md |  |
-| 326 | &nbsp;&nbsp;&nbsp;&nbsp;4.а. Если пользователь писал в течение дня | 15 | blocks/4-evening.md |  |
-| 341 | &nbsp;&nbsp;&nbsp;&nbsp;4.б. Если пользователь ничего не писал за день | 18 | blocks/4-evening.md |  |
-| 359 | &nbsp;&nbsp;&nbsp;&nbsp;Структура резюме 🔴 | 10 | blocks/4-evening.md |  |
-| 369 | &nbsp;&nbsp;&nbsp;&nbsp;Закрытие дня 🔴 | 5 | blocks/4-evening.md |  |
-| 374 | &nbsp;&nbsp;&nbsp;&nbsp;Как сделано в коде (итерация 6, 2026-10-14; допущения разработки, подтвердить с Тимуром и Настей) | 15 | decisions/ (допущения) + удалить остальное |  |
-| 389 | &nbsp;&nbsp;Блок 5 — Молчание и пауза | 4 | blocks/5-silence.md |  |
-| 393 | &nbsp;&nbsp;&nbsp;&nbsp;Состояния пользователя | 10 | blocks/5-silence.md |  |
-| 403 | &nbsp;&nbsp;&nbsp;&nbsp;Переходы | 26 | blocks/5-silence.md |  |
-| 429 | &nbsp;&nbsp;&nbsp;&nbsp;Техническое (для разработки, BOT-25) | 5 | blocks/5-silence.md |  |
-| 434 | &nbsp;&nbsp;&nbsp;&nbsp;Как сделано в коде (итерация 7, 2026-10-14; допущения разработки, подтвердить с Тимуром и Настей) | 13 | decisions/ (допущения) + удалить остальное |  |
+| 311 | &nbsp;&nbsp;Блок 4 — Вечер: работа с днём и резюме | 4 | blocks/4-evening.md | перенесено |
+| 315 | &nbsp;&nbsp;&nbsp;&nbsp;Когда | 5 | blocks/4-evening.md | перенесено |
+| 320 | &nbsp;&nbsp;&nbsp;&nbsp;Тайминг вечера (решение Тимура 2026-10-14) | 6 | blocks/4-evening.md | перенесено |
+| 326 | &nbsp;&nbsp;&nbsp;&nbsp;4.а. Если пользователь писал в течение дня | 15 | blocks/4-evening.md | перенесено |
+| 341 | &nbsp;&nbsp;&nbsp;&nbsp;4.б. Если пользователь ничего не писал за день | 18 | blocks/4-evening.md | перенесено |
+| 359 | &nbsp;&nbsp;&nbsp;&nbsp;Структура резюме 🔴 | 10 | blocks/4-evening.md | перенесено |
+| 369 | &nbsp;&nbsp;&nbsp;&nbsp;Закрытие дня 🔴 | 5 | blocks/4-evening.md | перенесено |
+| 374 | &nbsp;&nbsp;&nbsp;&nbsp;Как сделано в коде (итерация 6, 2026-10-14; допущения разработки, подтвердить с Тимуром и Настей) | 15 | decisions/ (допущения) + удалить остальное | допущения в decisions/, остальное удалено (код — источник) |
+| 389 | &nbsp;&nbsp;Блок 5 — Молчание и пауза | 4 | blocks/5-silence.md | перенесено |
+| 393 | &nbsp;&nbsp;&nbsp;&nbsp;Состояния пользователя | 10 | blocks/5-silence.md | перенесено |
+| 403 | &nbsp;&nbsp;&nbsp;&nbsp;Переходы | 26 | blocks/5-silence.md | перенесено |
+| 429 | &nbsp;&nbsp;&nbsp;&nbsp;Техническое (для разработки, BOT-25) | 5 | blocks/5-silence.md | перенесено |
+| 434 | &nbsp;&nbsp;&nbsp;&nbsp;Как сделано в коде (итерация 7, 2026-10-14; допущения разработки, подтвердить с Тимуром и Настей) | 13 | decisions/ (допущения) + удалить остальное | допущения в decisions/, остальное удалено (код — источник) |
 | 447 | &nbsp;&nbsp;Блок 6 — Недельный цикл | 2 | blocks/6-weekly.md |  |
 | 449 | &nbsp;&nbsp;&nbsp;&nbsp;Когда приходит | 9 | blocks/6-weekly.md |  |
 | 458 | &nbsp;&nbsp;&nbsp;&nbsp;Окно недельного резюме (решение Тимура 2026-10-14) | 6 | blocks/6-weekly.md |  |
