@@ -73,4 +73,11 @@ title: Параметры (числа, времена, наборы значен
 | P-MONTHLY-STEP-WAIT-MIN | 60 минут на каждый шаг среза (оценка, выбор запроса, новый запрос, оценка нового) | `MONTHLY_STEP_WAIT_MINUTES` в `database_v2.py` | [B7-07](blocks/7-monthly.md), [B7-08](blocks/7-monthly.md), [B7-11](blocks/7-monthly.md), [B7-12](blocks/7-monthly.md) |
 | P-DASHBOARD-WEEKS | дашборд показывает 4 последние недели (включая текущую) | `DASHBOARD_WEEKS` в `handlers/commands.py` | [B7-15](blocks/7-monthly.md) |
 
+## Служебные команды
+
+| ID | Значение | Константа в коде | Используется в |
+|---|---|---|---|
+| P-BUG-REPORTS-PER-HOUR | не больше 3 отчётов `/bug` в час от одного пользователя | `BUG_REPORTS_PER_HOUR` в `handlers/bug.py` | [CMD-BUG](commands.md) |
+| P-BUG-WAIT-MIN | ожидание описания ошибки после `/bug` — 15 минут, потом сообщение снова обычное | `BUG_WAIT_MINUTES` в `handlers/bug.py` | [CMD-BUG](commands.md) |
+
 [← К оглавлению](README.md)
