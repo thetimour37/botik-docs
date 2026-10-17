@@ -10,6 +10,7 @@ graph LR
   db["db-botik-pg<br/>PostgreSQL"]
   bot["bot-anastasia<br/>Telegram: Анастасия"]
   claude["api-anthropic<br/>Claude API"]
+  groq["api-groq<br/>Groq Whisper"]
   jarvis["jarvis<br/>AI-ассистент"]
   bot_jarvis["bot-jarvis<br/>Telegram: @ameripresso_jarvis_bot"]
 
@@ -17,6 +18,7 @@ graph LR
   railway --> db
   railway --> bot
   bot --> claude
+  bot --> groq
   bot --> db
   jarvis -- "deploy key, запись" --> repo_docs
   bot_jarvis --> jarvis
@@ -27,3 +29,5 @@ graph LR
 Обновлено 2026-10-14 (итерация 8): структура блоков не изменилась; у `railway-botik` новая зависимость сборки — matplotlib (графики недельного резюме), новых переменных окружения нет.
 
 Обновлено 2026-10-14 (итерация 11, переключение): структура блоков не изменилась. `bot-anastasia` работает на новой логике (режим 2) с планировщиком v2 (раз в минуту: срок Блока 2, утро, вечер, сессии, суббота, месячный срез); старая логика и её задачи планировщика остаются до массового перевода (`/resetv2 all`) и для служебного режима 1. Меню команд по умолчанию — режима 2, когда не осталось пользователей `flow_version=1`. Новых переменных окружения и сервисов нет.
+
+Обновлено 2026-10-17 (v2.3.0): добавлен сервис `api-groq` — распознавание голосовых; у `railway-botik` новая переменная `GROQ_API_KEY`.

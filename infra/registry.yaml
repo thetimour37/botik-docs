@@ -58,9 +58,13 @@ units:
       `release_notes/vX.Y.Z.md` в репозитории бота; в БД новая таблица bot_meta.
       v2.2.0 (2026-10-15): переработка спеки, поведение бота не менялось;
       новых переменных окружения нет.
+      v2.3.0 (2026-10-17): новая переменная GROQ_API_KEY (распознавание голоса
+      через api-groq; без неё бот отвечает, что понимает только текст);
+      ADMIN_IDS теперь ещё и задаёт админское меню команд. Отчёты /bug идут
+      на зашитый в код id разработчика (не ADMIN_IDS).
     status: active
     owner: Тимур
-    updated: 2026-10-15
+    updated: 2026-10-17
 
   - id: db-botik-pg
     type: service
@@ -144,6 +148,17 @@ units:
     status: active
     owner: Тимур
     updated: 2026-09-02
+
+  - id: api-groq
+    type: service
+    name: "Groq API (Whisper)"
+    purpose: "Распознавание голосовых сообщений (модель whisper-large-v3-turbo), BOT-57"
+    projects: [botik]
+    access: [Тимур]
+    description: "Ключ GROQ_API_KEY в Railway env (выпускается в console.groq.com). Ключ не хранится в репозиториях."
+    status: active
+    owner: Тимур
+    updated: 2026-10-17
 
   - id: jarvis
     type: service
