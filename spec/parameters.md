@@ -32,6 +32,8 @@ title: Параметры (числа, времена, наборы значен
 | P-REACTION-EMOJI | 👍 (✅ и 🤍 Telegram не допускает) | `REACTION_EMOJI` в `handlers/observation.py` | [B3-09](blocks/3-daily.md) |
 | P-OFFTOPIC-OFFERS-PER-DAY | 1 предложение запомнить тему в день | `OFFTOPIC_OFFERS_PER_DAY` в `database_v2.py` (реализовано датой последнего предложения `users.topic_offer_on` в `handlers/observation.py`) | [B3-16](blocks/3-daily.md) |
 | P-FOCUS-CHANGE-OWN-MAX-HOURS | 24 часа на фразу и подтверждение при «Свой фокус» | `FOCUS_CHANGE_OWN_MAX_HOURS` в `database_v2.py` | [B3-20](blocks/3-daily.md) |
+| P-VOICE-MAX-SECONDS | голосовое длиннее 180 секунд не распознаётся (просьба записать короче) | `VOICE_MAX_SECONDS` в `services/voice.py` | [B3-21](blocks/3-daily.md) |
+| P-VOICE-MODEL | модель распознавания речи: `whisper-large-v3-turbo` (Groq) | `VOICE_MODEL` в `services/voice.py` | [B3-21](blocks/3-daily.md) |
 
 ## Вечер и молчание (блоки 4–5)
 
